@@ -151,12 +151,20 @@ export default function App() {
           </p>
         )}
         {edition === 'web97' && (
-          <p className="w97-marquee" aria-hidden="true">
-            <span>
-              Welcome to TOKYO MAP Online! *** Landsat 5 photo of {t.day} {t.monthEn} {t.year}, {t.time} JST *** Select a place
-              from the list *** ようこそ、衛星から見た東京へ ***
-            </span>
-          </p>
+          <>
+            <p className="w97-marquee" aria-hidden="true">
+              <span>
+                ようこそ「TOKYO MAP Online」へ！ ★ {t.year}年{t.month}月{t.day}日 {t.time}、ランドサット5号が撮影した東京を掲載中 ★
+                Welcome! Select a place from the menu ★
+              </span>
+            </p>
+            <nav className="w97-nav" aria-label="Sections">
+              <a href="#photo">衛星写真 PHOTO</a>
+              <a href="#menu">目次 MENU</a>
+              <a href="#about">この画像について ABOUT</a>
+              <a href="#links">リンク LINKS</a>
+            </nav>
+          </>
         )}
       </header>
 
@@ -172,7 +180,7 @@ export default function App() {
       </section>
 
       <main className="spread">
-        <figure className="plate">
+        <figure className="plate" id="photo">
           <MapView
             manifest={manifest}
             places={places}
@@ -190,7 +198,7 @@ export default function App() {
           </figcaption>
         </figure>
 
-        <nav className="contents" aria-label="Places">
+        <nav className="contents" id="menu" aria-label="Places">
           <h3 className="contents__head">
             CONTENTS <span className="contents__hint">SELECT A PLACE</span>
           </h3>
@@ -247,7 +255,7 @@ export default function App() {
         </article>
       </main>
 
-      <footer className="colophon">
+      <footer className="colophon" id="about">
         <p>
           TOKYO MAP is a fictional magazine made for #30DayMapChallenge 2026, Day 6 “Vintage”. Not a reproduction of any real
           publication.
@@ -259,9 +267,16 @@ export default function App() {
         <p>Type: Archivo Black, Archivo, IBM Plex Mono, Jost, Zen Old Mincho (SIL Open Font License).</p>
         {edition === 'web97' && (
           <div className="w97-extra">
-            <p className="w97-uc">BACK ISSUES: UNDER CONSTRUCTION</p>
+            <h4 className="w97-h">更新履歴 WHAT'S NEW</h4>
+            <dl className="w97-log">
+              <dt>2026.11.04</dt>
+              <dd>
+                サイトを公開しました。{t.year}年{t.month}月{t.day}日の衛星写真を掲載。 <span className="w97-new">NEW!</span>
+              </dd>
+            </dl>
+            <p className="w97-uc">バックナンバー：準備中 / BACK ISSUES: UNDER CONSTRUCTION</p>
             <p>
-              SCENE DATE{' '}
+              撮影日 SCENE DATE{' '}
               <span className="w97-counter">
                 {scene.acquired_date
                   .replace(/-/g, '')
@@ -271,11 +286,14 @@ export default function App() {
                   ))}
               </span>
             </p>
+            <h4 className="w97-h" id="links">
+              リンク LINKS
+            </h4>
             <p>
-              LINKS: <a href="https://www.usgs.gov/landsat-missions/landsat-5">USGS Landsat 5</a> |{' '}
+              <a href="https://www.usgs.gov/landsat-missions/landsat-5">USGS Landsat 5</a> |{' '}
               <a href="https://maps.gsi.go.jp/">GSI Maps</a> | <a href="https://30daymapchallenge.com/">#30DayMapChallenge</a>
             </p>
-            <p className="w97-best">Best viewed at 800 x 600</p>
+            <p className="w97-best">このサイトは 800×600 以上の画面でご覧ください。 Best viewed at 800 x 600</p>
           </div>
         )}
       </footer>
