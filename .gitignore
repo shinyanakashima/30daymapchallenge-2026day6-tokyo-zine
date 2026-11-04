@@ -3,3 +3,4 @@ dist
 data/candidates
 *.log
 .DS_Store
+*.tsbuildinfo
