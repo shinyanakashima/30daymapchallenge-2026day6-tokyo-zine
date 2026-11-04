@@ -4,9 +4,25 @@
 
 ![desktop](docs/screen-desktop.png)
 
-| スマホ（初期表示） | スマホ（ASAKUSA選択） |
+## 3つのエディション
+
+同じ衛星画像・地名データのまま、誌面デザインを3案から切り替えられる（画面上部の EDITION。`?ed=newwave|pop|tate` で直接指定でき、選択はブラウザに保存）。
+
+| | 方向 | 書体・色 |
+| - | - | - |
+| A NEW WAVE | 硬派なニューウェーブ誌。極太グロテスク、斜めの帯、網点、トンボ、罫線 | Archivo Black / 墨・生成り・朱・コバルト |
+| B POP | メンフィス調のポップ誌。斜体の幾何学サンセリフ、エアブラシ風グラデーション帯、紙吹雪・波線、版ずれの色面 | Jost / 紺・クリーム・蛍光ピンク・ミント・黄 |
+| C TATEGUMI 縦組 | 日本の情報誌。明朝の縦組み誌名「東京地図」、縦組みリード、二重罫、小口の赤罫、地名に漢字併記 | Zen Old Mincho / 墨・生成り・金赤 |
+
+| B POP | C 縦組 |
 | - | - |
-| ![phone](docs/screen-phone-top.png) | ![phone selected](docs/screen-phone-asakusa.png) |
+| ![pop](docs/screen-desktop-pop.png) | ![tate](docs/screen-desktop-tate.png) |
+
+| スマホ A | スマホ B（GINZA選択） | スマホ C |
+| - | - | - |
+| ![phone](docs/screen-phone-top.png) | ![phone pop](docs/screen-phone-pop-ginza.png) | ![phone tate](docs/screen-phone-tate.png) |
+
+装飾はすべて地図の外側のレイヤで、地図画像・ラベル位置はエディションによらず共通。
 
 ## 操作
 
@@ -78,8 +94,8 @@ MapLibre の `image` ソースに manifest の4隅座標で配置する。
 - Vite + React + TypeScript、MapLibre GL JS 5（ラスタ1枚の image ソース、APIキー・動的サーバー不要）。
 - 地名ラベルは MapLibre Marker（HTML）で、地図の投影と同じ変換で配置。誌面装飾（斜めの帯・網点・紙の粒子・色版ずれ）は地図の外側の別レイヤ。地図本体には重ねない。
 - 地名の操作は目次ボタン（キーボード・スクリーンリーダー対応、`aria-pressed`）が担い、地図上のラベルはその鏡像。
-- 幅960px以下は縦組みに組み直し、地図の幅が560px未満では地図上は番号のみ（選択中のみ名称表示）。
-- フォント：Archivo Black / Archivo / IBM Plex Mono（SIL Open Font License、@fontsource で同梱）。
+- 幅960px以下は縦組みに組み直し、地図の幅が480px未満では地図上は番号のみ（選択中のみ名称表示）。
+- フォント：Archivo Black / Archivo / IBM Plex Mono / Jost / Zen Old Mincho（いずれも SIL Open Font License、@fontsource で同梱）。
 
 ## 再現手順
 

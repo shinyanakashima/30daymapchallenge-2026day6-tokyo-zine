@@ -1,17 +1,31 @@
+/* ==================================================================
+   TOKYO MAP — three editions of the same spread
+   A  newwave : hard new-wave grotesk, ink + vermilion + cobalt, rules
+   B  pop     : Memphis-style pop, fluorescent pink / mint / yellow
+   C  tate    : Japanese information-magazine, vertical Mincho masthead
+   ================================================================== */
+
 :root {
+  --gutter: 40px;
+  --side: 340px;
+  --jp: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+
+.page {
   --ink: #141210;
   --ink-soft: #3a352e;
   --paper: #efe7d6;
   --paper-deep: #e4d9c2;
-  --red: #e8412a;
-  --blue: #2846c8;
+  --a1: #e8412a; /* vermilion */
+  --a2: #2846c8; /* cobalt */
+  --a3: #e8412a;
+  --on-a1: #141210;
   --display: 'Archivo Black', 'Arial Black', sans-serif;
-  --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  --jp: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif;
-  --gutter: 40px;
-  --side: 360px;
-  color-scheme: light;
+  --head: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --reserve: calc(var(--side) + 32px);
 }
 
 * {
@@ -21,12 +35,10 @@
 html,
 body {
   margin: 0;
-  background: var(--ink);
+  background: #141210;
 }
 
 body {
-  color: var(--ink);
-  font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -40,11 +52,11 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--a2);
   outline-offset: 2px;
 }
 
-/* ------------------------------------------------------------------ page */
+/* ------------------------------------------------------------------ page grid */
 
 .page {
   position: relative;
@@ -53,11 +65,14 @@ button {
   max-width: 1480px;
   min-height: 100svh;
   margin: 0 auto;
-  padding: 26px var(--gutter) 28px;
+  padding: 14px var(--gutter) 28px;
   background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--side);
   grid-template-areas:
+    'editions editions'
     'mast lead'
     'spread spread'
     'colophon colophon';
@@ -65,32 +80,36 @@ button {
   align-items: end;
 }
 
-/* print texture: paper grain (kept under the photo plate) */
-.grain {
+/* decorations: every edition renders the same nodes and shows its own */
+.grain,
+.band,
+.dots,
+.trim,
+.confetti {
   position: absolute;
-  inset: 0;
   z-index: 0;
   pointer-events: none;
+  display: none;
+}
+
+.grain {
+  display: block;
+  inset: 0;
   opacity: 0.32;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* diagonal band */
 .band {
-  position: absolute;
-  z-index: 0;
   left: -20%;
   right: -20%;
-  top: 46%;
+  top: 48%;
   height: 46px;
   transform: rotate(-8deg);
-  background: var(--red);
-  display: flex;
+  background: var(--a1);
   align-items: center;
   overflow: hidden;
   white-space: nowrap;
-  pointer-events: none;
 }
 
 .band span {
@@ -100,32 +119,99 @@ button {
   padding-left: 2em;
 }
 
-/* halftone field */
 .dots {
-  position: absolute;
-  z-index: 0;
   right: -60px;
   top: -40px;
   width: 520px;
   height: 420px;
-  pointer-events: none;
-  background-image: radial-gradient(circle, var(--blue) 1.7px, transparent 2.1px);
+  background-image: radial-gradient(circle, var(--a2) 1.7px, transparent 2.1px);
   background-size: 8px 8px;
   -webkit-mask-image: radial-gradient(closest-side at 70% 40%, #000 20%, transparent 100%);
   mask-image: radial-gradient(closest-side at 70% 40%, #000 20%, transparent 100%);
   opacity: 0.85;
 }
 
-.disc {
-  position: absolute;
-  z-index: 0;
-  right: -110px;
-  bottom: -110px;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 34px solid var(--blue);
-  pointer-events: none;
+/* printer's trim marks in the four corners */
+.trim {
+  inset: 10px;
+  --m: var(--ink);
+  background:
+    linear-gradient(var(--m), var(--m)) 0 14px / 22px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) 14px 0 / 1px 22px no-repeat,
+    linear-gradient(var(--m), var(--m)) 100% 14px / 22px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) calc(100% - 14px) 0 / 1px 22px no-repeat,
+    linear-gradient(var(--m), var(--m)) 0 calc(100% - 14px) / 22px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) 14px 100% / 1px 22px no-repeat,
+    linear-gradient(var(--m), var(--m)) 100% calc(100% - 14px) / 22px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) calc(100% - 14px) 100% / 1px 22px no-repeat;
+}
+
+.confetti {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------------ edition switch */
+
+.editions {
+  grid-area: editions;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink);
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+}
+
+.editions__label {
+  margin-right: 6px;
+}
+
+.edition {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px 0 4px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  cursor: pointer;
+}
+
+.edition__key {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.edition__ja {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.edition:hover {
+  background: var(--paper-deep);
+}
+
+.edition.is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.edition.is-on .edition__key {
+  background: var(--a1);
+  color: var(--on-a1);
 }
 
 /* ------------------------------------------------------------------ masthead */
@@ -164,14 +250,18 @@ button {
   gap: 0 0.12em;
 }
 
+.mast__ja {
+  display: none;
+}
+
 /* slight plate misregistration */
 .mast__tokyo {
   color: var(--ink);
-  text-shadow: 0.022em 0.014em 0 var(--blue);
+  text-shadow: 0.022em 0.014em 0 var(--a2);
 }
 
 .mast__map {
-  color: var(--red);
+  color: var(--a1);
   text-shadow: -0.018em 0.012em 0 rgba(20, 18, 16, 0.85);
   transform: skewX(-8deg);
   display: inline-block;
@@ -182,14 +272,12 @@ button {
   position: relative;
   z-index: 2;
   margin: 0 0 18px;
-  align-self: end;
   background: var(--paper);
 }
 
 .lead__head {
   margin: 0 0 10px;
-  font: 700 30px/0.98 var(--sans);
-  font-stretch: 100%;
+  font: 700 30px/0.98 var(--head);
   letter-spacing: -0.01em;
   text-transform: uppercase;
   border-top: 6px solid var(--ink);
@@ -223,8 +311,8 @@ button {
 .plate {
   grid-area: plate;
   margin: 0;
-  /* square-ish photo sized to the viewport height so the first screen shows the whole spread */
-  width: min(calc(100vw - 2 * var(--gutter) - 32px - 300px), calc((100svh - 300px) * 0.988), 940px);
+  /* sized to the viewport height so the first screen shows the whole spread */
+  width: min(calc(100vw - 2 * var(--gutter) - var(--reserve)), calc((100svh - 330px) * 0.988), 940px);
   min-width: 420px;
   justify-self: end;
 }
@@ -234,7 +322,8 @@ button {
   aspect-ratio: 1357 / 1373;
   background: var(--ink);
   border: 3px solid var(--ink);
-  box-shadow: 10px 10px 0 var(--ink);
+  outline: 1px solid var(--ink);
+  outline-offset: 5px;
   container-type: inline-size;
   container-name: map;
 }
@@ -245,7 +334,7 @@ button {
 }
 
 .maplibregl-canvas:focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--a2);
   outline-offset: -3px;
 }
 
@@ -261,12 +350,11 @@ button {
 .tool {
   min-width: 40px;
   height: 40px;
-  border: 0;
+  border: 2px solid var(--ink);
   background: var(--paper);
   color: var(--ink);
   font: 500 18px/1 var(--mono);
   cursor: pointer;
-  box-shadow: 3px 3px 0 var(--ink);
 }
 
 .tool--wide {
@@ -276,7 +364,8 @@ button {
 }
 
 .tool:hover {
-  background: var(--red);
+  background: var(--a1);
+  color: var(--on-a1);
 }
 
 .caption {
@@ -321,9 +410,9 @@ button {
   display: flex;
   align-items: stretch;
   white-space: nowrap;
-  font: 700 12px/1 var(--sans);
+  font: 700 12px/1 var(--head);
   letter-spacing: 0.07em;
-  box-shadow: 2px 2px 0 var(--ink);
+  border: 1.5px solid var(--ink);
   transition: opacity 0.2s;
 }
 
@@ -368,7 +457,7 @@ button {
 }
 
 .pin.is-selected.pin--lead::after {
-  background: var(--red);
+  background: var(--a1);
 }
 
 .pin__no {
@@ -384,19 +473,24 @@ button {
   padding: 4px 6px 3px;
 }
 
+.pin__ja {
+  display: none;
+}
+
 .pin:hover .pin__name {
-  background: var(--red);
+  background: var(--a1);
+  color: var(--on-a1);
 }
 
 .pin.is-selected .pin__dot {
   inset: -4px;
-  background: var(--red);
+  background: var(--a1);
   border-width: 4px;
 }
 
 .pin.is-selected .pin__name {
-  background: var(--red);
-  color: var(--ink);
+  background: var(--a1);
+  color: var(--on-a1);
 }
 
 .pin.is-selected .pin__label {
@@ -408,13 +502,13 @@ button {
 }
 
 /* narrow photo: numbers only, the name appears on selection */
-@container map (max-width: 560px) {
-  .pin__name {
+@container map (max-width: 480px) {
+  .page[data-edition] .pin .pin__name {
     display: none;
   }
 
-  .pin.is-selected .pin__name {
-    display: block;
+  .page[data-edition] .pin.is-selected .pin__name {
+    display: flex;
   }
 
   .pin__no {
@@ -446,7 +540,7 @@ button {
   font: 500 11px/1 var(--mono);
   letter-spacing: 0.16em;
   color: var(--paper);
-  background: var(--blue);
+  background: var(--a2);
   padding: 4px 6px;
 }
 
@@ -473,12 +567,12 @@ button {
 
 .entry__no {
   font: 500 13px/1 var(--mono);
-  color: var(--red);
+  color: var(--a1);
   padding-left: 6px;
 }
 
 .entry__name {
-  font: 700 17px/1.05 var(--sans);
+  font: 700 17px/1.05 var(--head);
   letter-spacing: 0.05em;
 }
 
@@ -500,18 +594,14 @@ button {
   color: var(--paper);
 }
 
-.entry.is-selected .entry__no {
-  color: var(--red);
-}
-
 /* ------------------------------------------------------------------ story card */
 
 .story {
   grid-area: story;
   background: var(--paper);
-  border: 3px solid var(--ink);
+  border: 1px solid var(--ink);
+  border-top: 10px solid var(--a1);
   padding: 14px 16px 16px;
-  box-shadow: 8px 8px 0 var(--red);
 }
 
 .story__kicker {
@@ -522,8 +612,8 @@ button {
 
 .story__no {
   display: inline-block;
-  background: var(--red);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
   padding: 4px 6px;
   margin-right: 8px;
 }
@@ -567,8 +657,8 @@ button {
 }
 
 .back:hover {
-  background: var(--red);
-  color: var(--ink);
+  background: var(--a1);
+  color: var(--on-a1);
 }
 
 /* ------------------------------------------------------------------ colophon */
@@ -595,21 +685,511 @@ button {
   color: var(--ink);
 }
 
-/* ------------------------------------------------------------------ narrow: re-set as a vertical page */
+/* ==================================================================
+   A  NEW WAVE
+   ================================================================== */
+
+.page[data-edition='newwave'] .band,
+.page[data-edition='newwave'] .dots,
+.page[data-edition='newwave'] .trim {
+  display: flex;
+}
+
+.page[data-edition='newwave'] .dots,
+.page[data-edition='newwave'] .trim {
+  display: block;
+}
+
+/* ==================================================================
+   B  POP
+   ================================================================== */
+
+.page[data-edition='pop'] {
+  --ink: #1d1a3a;
+  --ink-soft: #3d3960;
+  --paper: #fbf2e6;
+  --paper-deep: #f6e3cf;
+  --a1: #ff4f9a; /* fluorescent pink */
+  --a2: #18b79a; /* mint */
+  --a3: #ffcf2e; /* yellow */
+  --on-a1: #1d1a3a;
+  --display: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+  --head: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+  --body: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+}
+
+.page[data-edition='pop'] .confetti {
+  display: block;
+}
+
+.page[data-edition='pop'] .confetti .c1 {
+  fill: var(--a1);
+}
+
+.page[data-edition='pop'] .confetti .c2 {
+  fill: var(--a2);
+}
+
+.page[data-edition='pop'] .confetti .c3 {
+  fill: var(--a3);
+}
+
+.page[data-edition='pop'] .confetti path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+/* airbrushed gradient band */
+.page[data-edition='pop'] .band {
+  display: flex;
+  top: 40%;
+  height: 70px;
+  transform: rotate(-12deg);
+  background: linear-gradient(90deg, var(--a2), var(--a3) 45%, var(--a1));
+  filter: saturate(1.1);
+}
+
+.page[data-edition='pop'] .band span {
+  font: 500 16px/1 var(--head);
+  letter-spacing: 0.3em;
+}
+
+.page[data-edition='pop'] .dots {
+  display: block;
+  background-image: radial-gradient(circle, var(--a1) 2px, transparent 2.4px);
+  background-size: 12px 12px;
+}
+
+.page[data-edition='pop'] .mast__title {
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  line-height: 0.82;
+}
+
+.page[data-edition='pop'] .mast__tokyo {
+  text-shadow: 0.035em 0.03em 0 var(--a3);
+}
+
+.page[data-edition='pop'] .mast__map {
+  transform: none;
+  text-shadow: 0.035em 0.03em 0 var(--a2);
+}
+
+.page[data-edition='pop'] .chip {
+  background: var(--a1);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.page[data-edition='pop'] .lead__head {
+  font-weight: 800;
+  font-style: italic;
+  font-size: 34px;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.page[data-edition='pop'] .lead__head::before {
+  content: '';
+  display: block;
+  height: 12px;
+  margin-bottom: 12px;
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 3px, transparent 3px 9px);
+}
+
+.page[data-edition='pop'] .map-shell {
+  border-width: 4px;
+  outline: 0;
+}
+
+/* colour block printed off-register behind the photo */
+.page[data-edition='pop'] .map-shell::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  transform: translate(16px, 16px);
+  background: var(--a2);
+}
+
+.page[data-edition='pop'] .tool {
+  border-radius: 999px;
+  background: var(--a3);
+}
+
+.page[data-edition='pop'] .pin__dot {
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+
+.page[data-edition='pop'] .pin__label {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.page[data-edition='pop'] .pin__no {
+  background: var(--a1);
+  color: var(--ink);
+}
+
+.page[data-edition='pop'] .pin.is-selected .pin__name,
+.page[data-edition='pop'] .pin:hover .pin__name {
+  background: var(--a3);
+}
+
+.page[data-edition='pop'] .contents__head {
+  font-weight: 800;
+  font-style: italic;
+  font-size: 26px;
+  border-bottom: 4px solid var(--ink);
+}
+
+.page[data-edition='pop'] .contents__hint {
+  background: var(--a1);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.page[data-edition='pop'] .entry__no {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--a3);
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.page[data-edition='pop'] .entry__name {
+  font-weight: 500;
+  font-size: 19px;
+}
+
+.page[data-edition='pop'] .entry.is-selected .entry__no {
+  background: var(--a1);
+}
+
+.page[data-edition='pop'] .story {
+  border: 4px solid var(--ink);
+  border-radius: 0 28px 0 28px;
+  box-shadow: none;
+  background: var(--paper);
+}
+
+.page[data-edition='pop'] .story__no {
+  background: var(--a1);
+  color: var(--ink);
+  border-radius: 999px;
+}
+
+.page[data-edition='pop'] .story__title {
+  font-weight: 800;
+  font-style: italic;
+  font-size: 30px;
+}
+
+.page[data-edition='pop'] .story__text {
+  font-size: 16px;
+}
+
+.page[data-edition='pop'] .back,
+.page[data-edition='pop'] .edition {
+  border-radius: 999px;
+}
+
+.page[data-edition='pop'] .edition__key {
+  border-radius: 50%;
+}
+
+/* ==================================================================
+   C  TATEGUMI — vertical Japanese masthead
+   ================================================================== */
+
+.page[data-edition='tate'] {
+  --ink: #1c1a17;
+  --ink-soft: #45403a;
+  --paper: #f2ede1;
+  --paper-deep: #e6dfcd;
+  --a1: #d42a1e; /* kin-aka red */
+  --a2: #213c70; /* indigo */
+  --on-a1: #f2ede1;
+  --mincho: 'Zen Old Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --display: var(--mincho);
+  --head: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --reserve: calc(var(--side) + 32px + 250px);
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    'editions editions editions'
+    'spread lead mast'
+    'colophon colophon colophon';
+  align-items: start;
+}
+
+.page[data-edition='tate'] .trim {
+  display: block;
+}
+
+/* a single red rule down the fore-edge */
+.page[data-edition='tate'] .band {
+  display: block;
+  left: auto;
+  right: 26px;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  height: auto;
+  transform: none;
+}
+
+.page[data-edition='tate'] .band span {
+  display: none;
+}
+
+.page[data-edition='tate'] .mast {
+  writing-mode: vertical-rl;
+  margin: 0;
+  padding: 0 0 0 8px;
+  display: flex;
+  flex-direction: column; /* columns run right to left */
+  gap: 14px;
+  border-right: 1px solid var(--ink);
+}
+
+.page[data-edition='tate'] .mast__issue {
+  margin: 0;
+  font-size: 12px;
+}
+
+.page[data-edition='tate'] .chip {
+  background: var(--a1);
+  color: var(--paper);
+  margin: 0 0 8px;
+  padding: 7px 4px;
+}
+
+.page[data-edition='tate'] .mast__title {
+  font-size: clamp(80px, 8.4vw, 124px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0;
+  align-items: start;
+}
+
+.page[data-edition='tate'] .mast__ja {
+  display: block;
+  font-family: var(--mincho);
+  text-shadow: 0.02em 0.02em 0 rgba(212, 42, 30, 0.85);
+}
+
+.page[data-edition='tate'] .mast__tokyo,
+.page[data-edition='tate'] .mast__map {
+  font: 400 18px/1 var(--mono);
+  letter-spacing: 0.4em;
+  color: var(--ink);
+  text-shadow: none;
+  transform: none;
+  margin-top: 6px;
+}
+
+.page[data-edition='tate'] .mast__ja {
+  margin-left: 10px;
+}
+
+.page[data-edition='tate'] .mast__map {
+  color: var(--a1);
+}
+
+.page[data-edition='tate'] .lead {
+  writing-mode: vertical-rl;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: calc(100svh - 120px);
+  background: transparent;
+}
+
+.page[data-edition='tate'] .lead__head {
+  font: 700 22px/1.1 var(--head);
+  border-top: 0;
+  border-right: 4px solid var(--ink);
+  padding: 0 10px 0 0;
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+.page[data-edition='tate'] .lead__ja {
+  font-family: var(--mincho);
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--ink);
+  letter-spacing: 0.08em;
+}
+
+.page[data-edition='tate'] .plate {
+  width: min(calc(100vw - 2 * var(--gutter) - var(--reserve)), calc((100svh - 200px) * 0.988), 900px);
+}
+
+.page[data-edition='tate'] .map-shell {
+  border-width: 1px;
+  outline-offset: 4px;
+}
+
+.page[data-edition='tate'] .pin__dot {
+  background: var(--a1);
+  border-width: 2px;
+  border-color: var(--paper);
+  box-shadow: 0 0 0 1.5px var(--ink);
+}
+
+.page[data-edition='tate'] .pin__label {
+  border-width: 1px;
+}
+
+.page[data-edition='tate'] .pin__no {
+  background: var(--a1);
+}
+
+.page[data-edition='tate'] .pin__name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page[data-edition='tate'] .pin__ja {
+  display: inline;
+  font: 700 12px/1 var(--mincho);
+  letter-spacing: 0.05em;
+}
+
+.page[data-edition='tate'] .tool {
+  border-width: 1px;
+}
+
+.page[data-edition='tate'] .contents__head {
+  font: 900 24px/1 var(--mincho);
+  border-bottom: 3px double var(--ink);
+}
+
+.page[data-edition='tate'] .contents__head::before {
+  content: '目次';
+  font-family: var(--mincho);
+  margin-right: 0.4em;
+}
+
+.page[data-edition='tate'] .contents__head {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+
+.page[data-edition='tate'] .contents__hint {
+  margin-left: auto;
+}
+
+.page[data-edition='tate'] .contents__hint {
+  background: transparent;
+  color: var(--a1);
+  border: 1px solid var(--a1);
+}
+
+.page[data-edition='tate'] .entry {
+  grid-template-columns: 2.4em auto minmax(0, 1fr);
+}
+
+.page[data-edition='tate'] .entry__ja {
+  order: -1;
+  grid-column: 2;
+  font: 900 18px/1 var(--mincho);
+  color: var(--ink);
+}
+
+.page[data-edition='tate'] .entry__no {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.page[data-edition='tate'] .entry__name {
+  grid-column: 3;
+  grid-row: 1;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+}
+
+.page[data-edition='tate'] .entry.is-selected {
+  background: var(--a1);
+}
+
+.page[data-edition='tate'] .entry.is-selected .entry__ja,
+.page[data-edition='tate'] .entry.is-selected .entry__name,
+.page[data-edition='tate'] .entry.is-selected .entry__no {
+  color: var(--paper);
+}
+
+.page[data-edition='tate'] .story {
+  border: 0;
+  border-top: 3px double var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 14px 0 16px;
+  background: transparent;
+}
+
+.page[data-edition='tate'] .story__no {
+  background: var(--a1);
+  color: var(--paper);
+}
+
+.page[data-edition='tate'] .story__title {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.page[data-edition='tate'] .story__title span {
+  font: 900 20px/1 var(--mincho);
+}
+
+/* ==================================================================
+   narrow screens: re-set as a vertical page
+   ================================================================== */
 
 @media (max-width: 960px) {
   :root {
     --gutter: 16px;
   }
 
-  .page {
+  .page,
+  .page[data-edition='tate'] {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
+      'editions'
       'mast'
       'lead'
       'spread'
       'colophon';
-    padding-top: 18px;
+    padding-top: 12px;
+  }
+
+  .trim,
+  .page[data-edition] .trim {
+    display: none;
+  }
+
+  .editions__label {
+    width: 100%;
+    margin-bottom: 2px;
   }
 
   .mast__title {
@@ -640,15 +1220,15 @@ button {
     row-gap: 26px;
   }
 
-  .plate {
+  .plate,
+  .page[data-edition='tate'] .plate {
     width: 100%;
     min-width: 0;
     justify-self: stretch;
-    padding-right: 8px;
   }
 
   .map-shell {
-    box-shadow: 8px 8px 0 var(--ink);
+    margin: 0 6px;
   }
 
   .contents__list {
@@ -670,7 +1250,7 @@ button {
   }
 
   .band {
-    top: 250px;
+    top: 290px;
     height: 34px;
   }
 
@@ -684,12 +1264,74 @@ button {
     right: -80px;
   }
 
-  .disc {
-    display: none;
+  .page[data-edition='pop'] .band {
+    top: 270px;
+    height: 44px;
   }
 
-  .story {
-    margin-right: 8px;
+  .page[data-edition='pop'] .lead__head {
+    font-size: 26px;
+  }
+
+  /* tategumi on a phone: vertical masthead and lead side by side */
+  .page[data-edition='tate'] {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'editions editions'
+      'lead mast'
+      'spread spread'
+      'colophon colophon';
+  }
+
+  .page[data-edition='tate'] .band {
+    right: 8px;
+    width: 4px;
+    top: 0;
+  }
+
+  .page[data-edition='tate'] .mast {
+    padding-right: 10px;
+    margin-right: 6px;
+  }
+
+  .page[data-edition='tate'] .mast__title {
+    font-size: clamp(56px, 16vw, 96px);
+  }
+
+  .page[data-edition='tate'] .mast__issue {
+    font-size: 11px;
+  }
+
+  .page[data-edition='tate'] .lead {
+    height: min(68vw, 330px);
+    justify-self: end;
+  }
+
+  .page[data-edition='tate'] .lead__head {
+    font-size: 17px;
+  }
+
+  .page[data-edition='tate'] .lead__ja {
+    font-size: 14px;
+  }
+
+  .page[data-edition='tate'] .entry {
+    grid-template-columns: 2.2em minmax(0, 1fr);
+  }
+
+  .page[data-edition='tate'] .entry__ja {
+    display: block;
+    grid-column: 2;
+  }
+
+  .page[data-edition='tate'] .entry__name {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 10px;
+  }
+
+  .page[data-edition='tate'] .entry__no {
+    grid-row: 1 / span 2;
   }
 }
 

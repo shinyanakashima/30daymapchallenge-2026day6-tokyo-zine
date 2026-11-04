@@ -8,6 +8,41 @@ import { jst, latLng, utcTime } from './format'
 const manifest = manifestJson as unknown as Manifest
 const places = placesJson.places as Place[]
 
+const EDITIONS = [
+  { id: 'newwave', key: 'A', name: 'NEW WAVE' },
+  { id: 'pop', key: 'B', name: 'POP' },
+  { id: 'tate', key: 'C', name: 'TATEGUMI', ja: '縦組' },
+] as const
+type Edition = (typeof EDITIONS)[number]['id']
+const isEdition = (v: unknown): v is Edition => EDITIONS.some((e) => e.id === v)
+
+function initialEdition(): Edition {
+  const q = new URLSearchParams(window.location.search).get('ed')
+  if (isEdition(q)) return q
+  try {
+    const s = window.localStorage.getItem('tokyo-map-edition')
+    if (isEdition(s)) return s
+  } catch {
+    /* storage unavailable */
+  }
+  return 'newwave'
+}
+
+function useEdition() {
+  const [edition, setEdition] = useState<Edition>(initialEdition)
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    url.searchParams.set('ed', edition)
+    window.history.replaceState(null, '', url)
+    try {
+      window.localStorage.setItem('tokyo-map-edition', edition)
+    } catch {
+      /* storage unavailable */
+    }
+  }, [edition])
+  return [edition, setEdition] as const
+}
+
 function useReducedMotion() {
   const q = '(prefers-reduced-motion: reduce)'
   const [reduced, setReduced] = useState(() => window.matchMedia(q).matches)
@@ -24,6 +59,7 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [resetKey, setResetKey] = useState(0)
   const reducedMotion = useReducedMotion()
+  const [edition, setEdition] = useEdition()
 
   const scene = manifest.scene
   const t = jst(scene.acquired_utc)
@@ -46,19 +82,55 @@ export default function App() {
   const bandText = `TOKYO · ${t.day} ${t.monthEn} ${t.year} · ${t.time} JST · SEEN FROM 705 KM · `
 
   return (
-    <div className="page">
+    <div className="page" data-edition={edition}>
       <div className="grain" aria-hidden="true" />
       <div className="band" aria-hidden="true">
         <span>{bandText.repeat(6)}</span>
       </div>
       <div className="dots" aria-hidden="true" />
-      <div className="disc" aria-hidden="true" />
+      <div className="trim" aria-hidden="true" />
+      <svg className="confetti" aria-hidden="true" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+        <polygon points="8,560 50,520 58,585" className="c1" />
+        <polygon points="880,620 940,600 910,660" className="c2" />
+        <polygon points="520,940 570,900 585,960" className="c3" />
+        <path d="M20 520 q 20 -30 40 0 t 40 0 t 40 0 t 40 0" className="sq1" />
+        <path d="M870 150 q 15 -25 30 0 t 30 0 t 30 0" className="sq2" />
+        <path d="M470 975 q 15 -25 30 0 t 30 0 t 30 0" className="sq3" />
+        <circle cx="960" cy="400" r="14" className="c1" />
+        <circle cx="40" cy="880" r="22" className="c2" />
+        <rect x="300" y="960" width="40" height="40" transform="rotate(20 320 980)" className="c3" />
+      </svg>
+
+      <div className="editions" role="radiogroup" aria-label="Edition (page design)">
+        <span className="editions__label">EDITION</span>
+        {EDITIONS.map((e) => (
+          <button
+            key={e.id}
+            type="button"
+            role="radio"
+            aria-checked={edition === e.id}
+            className={`edition${edition === e.id ? ' is-on' : ''}`}
+            onClick={() => setEdition(e.id)}
+          >
+            <span className="edition__key">{e.key}</span>
+            {e.name}
+            {'ja' in e && (
+              <span className="edition__ja" lang="ja">
+                {e.ja}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
 
       <header className="mast">
         <p className="mast__issue">
           <span className="chip">No.06</span> SATELLITE ISSUE · {t.monthEn} {t.year}
         </p>
         <h1 className="mast__title">
+          <span className="mast__ja" lang="ja">
+            東京地図
+          </span>
           <span className="mast__tokyo">TOKYO</span>
           <span className="mast__map">MAP</span>
         </h1>
@@ -160,7 +232,7 @@ export default function App() {
           Image: {scene.product_id} · {scene.processing_level} · source CRS {scene.source_crs} · {manifest.license}.{' '}
           <a href={`${import.meta.env.BASE_URL}data/manifest.json`}>manifest.json</a>
         </p>
-        <p>Type: Archivo Black, Archivo, IBM Plex Mono (SIL Open Font License).</p>
+        <p>Type: Archivo Black, Archivo, IBM Plex Mono, Jost, Zen Old Mincho (SIL Open Font License).</p>
       </footer>
     </div>
   )

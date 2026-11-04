@@ -36,6 +36,8 @@ export default function MapView({ manifest, places, selectedId, resetKey, onSele
   onSelectRef.current = onSelect
   const onDeselectRef = useRef(onDeselect)
   onDeselectRef.current = onDeselect
+  const selectedRef = useRef(selectedId)
+  selectedRef.current = selectedId
 
   const c = manifest.coordinates
   const bounds: LngLatBoundsLike = [
@@ -88,7 +90,11 @@ export default function MapView({ manifest, places, selectedId, resetKey, onSele
       ])
     }
     map.on('load', updateLimits)
-    map.on('resize', updateLimits)
+    map.on('resize', () => {
+      updateLimits()
+      // the plate changes size between editions and breakpoints: keep the full view filling it
+      if (selectedRef.current === null) map.fitBounds(bounds, { padding: 0, duration: 0 })
+    })
 
     for (const p of places) {
       const node = document.createElement('button')
@@ -98,7 +104,7 @@ export default function MapView({ manifest, places, selectedId, resetKey, onSele
       // the contents menu carries the accessible control; the pins mirror it with the mouse/touch
       node.tabIndex = -1
       node.setAttribute('aria-hidden', 'true')
-      node.innerHTML = `<span class="pin__dot"></span><span class="pin__label"><span class="pin__no">${p.no}</span><span class="pin__name">${p.name}</span></span>`
+      node.innerHTML = `<span class="pin__dot"></span><span class="pin__label"><span class="pin__no">${p.no}</span><span class="pin__name">${p.name}<span class="pin__ja" lang="ja">${p.ja}</span></span></span>`
       node.addEventListener('click', (ev) => {
         ev.stopPropagation()
         onSelectRef.current(p.id)
