@@ -1,0 +1,66 @@
+{
+  "title": "TOKYO MAP — Landsat 5 TM natural-colour composite",
+  "scene": {
+    "product_id": "LT05_L2SP_107035_19870521_20201014_02_T1",
+    "landsat_scene_id": "LT51070351987141HAJ01",
+    "satellite": "Landsat 5",
+    "sensor": "Thematic Mapper (TM)",
+    "acquired_utc": "1987-05-21T00:39:47Z",
+    "acquired_date": "1987-05-21",
+    "wrs_path_row": "107/035",
+    "scene_cloud_cover_pct": 0.0,
+    "window_cloud_pct_qa_pixel": 0.472,
+    "sun_elevation_deg": 59.95,
+    "processing_level": "Collection 2 Level-2 Surface Reflectance (L2SP), Tier 1",
+    "source_crs": "EPSG:32654",
+    "native_resolution_m": 30,
+    "doi": "10.5066/P9IAXOVV",
+    "usgs_stac": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr/items/LT05_L2SP_107035_19870521_20201014_02_T1_SR",
+    "data_access": "Microsoft Planetary Computer mirror of USGS Landsat C2 L2 (STAC item LT05_L2SP_107035_19870521_02_T1)"
+  },
+  "processing": {
+    "bands": {
+      "R": "SR_B3 (0.63-0.69 µm)",
+      "G": "SR_B2 (0.52-0.60 µm)",
+      "B": "SR_B1 (0.45-0.52 µm)"
+    },
+    "composite": "natural colour (no near-infrared)",
+    "reflectance": "DN * 2.75e-05 + (-0.2); DN 0 = nodata",
+    "stretch": "shared linear stretch 0.5-99.5 percentile (0.0223-0.1769 reflectance), gamma 0.85",
+    "reprojection": "EPSG:32654 -> EPSG:3857, bilinear",
+    "crop_bbox_wgs84": [
+      139.55,
+      35.45,
+      140.0,
+      35.82
+    ],
+    "output": {
+      "file": "data/tokyo-landsat.jpg",
+      "width": 1357,
+      "height": 1373,
+      "format": "JPEG q90"
+    },
+    "notes": "Colours are a display stretch of surface reflectance, not calibrated true colour. 30 m pixels: individual buildings are not resolvable."
+  },
+  "coordinates": [
+    [
+      139.55,
+      35.82
+    ],
+    [
+      140.0,
+      35.82
+    ],
+    [
+      140.0,
+      35.45
+    ],
+    [
+      139.55,
+      35.45
+    ]
+  ],
+  "credit": "Landsat 5 TM imagery courtesy of the U.S. Geological Survey / NASA Landsat Program",
+  "license": "Public domain (USGS Landsat data have no restrictions on use)",
+  "retrieved": "2026-11-04"
+}

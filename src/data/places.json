@@ -1,0 +1,53 @@
+{
+  "note": "Approximate representative points for districts and water bodies, not entrances or administrative centroids. Positions use present-day address reference points.",
+  "places": [
+    {
+      "id": "shinjuku", "no": "01", "name": "SHINJUKU", "ja": "新宿", "kind": "district",
+      "lng": 139.703568, "lat": 35.691227,
+      "text": "On the upland about 4.5 km west of the Imperial Palace. The green block just south-east of the point is Shinjuku Gyoen.",
+      "source": "GSI Address Search API — 東京都新宿区新宿三丁目"
+    },
+    {
+      "id": "shibuya", "no": "02", "name": "SHIBUYA", "ja": "渋谷", "kind": "district",
+      "lng": 139.698318, "lat": 35.657284,
+      "text": "In a small valley cut into the upland, about 3.8 km south of Shinjuku. The large wooded area to the north is Meiji Jingu.",
+      "source": "GSI Address Search API — 東京都渋谷区道玄坂一丁目"
+    },
+    {
+      "id": "palace", "no": "03", "name": "IMPERIAL PALACE", "ja": "皇居", "kind": "landmark area",
+      "lng": 139.752151, "lat": 35.684052,
+      "text": "The largest green patch in the centre of the city, ringed by moats. A fixed point for reading the rest of the map.",
+      "source": "GSI Address Search API — 東京都千代田区千代田"
+    },
+    {
+      "id": "ginza", "no": "04", "name": "GINZA", "ja": "銀座", "kind": "district",
+      "lng": 139.766251, "lat": 35.671169,
+      "text": "On flat low land about 1.9 km south-east of the Imperial Palace, between the palace and the mouth of the Sumida River.",
+      "source": "GSI Address Search API — 東京都中央区銀座四丁目"
+    },
+    {
+      "id": "ueno", "no": "05", "name": "UENO", "ja": "上野", "kind": "district",
+      "lng": 139.773544, "lat": 35.715328,
+      "text": "The point sits in Ueno Park, the dark green at the eastern edge of the upland, about 4 km north-east of the Imperial Palace.",
+      "source": "GSI Address Search API — 東京都台東区上野公園"
+    },
+    {
+      "id": "asakusa", "no": "06", "name": "ASAKUSA", "ja": "浅草", "kind": "district",
+      "lng": 139.795456, "lat": 35.714943,
+      "text": "On the low land by the west bank of the Sumida River, about 2 km east of Ueno.",
+      "source": "GSI Address Search API — 東京都台東区浅草二丁目"
+    },
+    {
+      "id": "sumida", "no": "07", "name": "SUMIDA RIVER", "ja": "隅田川", "kind": "river",
+      "lng": 139.78987, "lat": 35.68905,
+      "text": "The river that bends south through the eastern lowland and runs into Tokyo Bay. The wider channel further east is the Arakawa.",
+      "source": "Point placed on the river channel in this image; checked against GSI Maps (地理院地図)"
+    },
+    {
+      "id": "bay", "no": "08", "name": "TOKYO BAY", "ja": "東京湾", "kind": "water body",
+      "lng": 139.86, "lat": 35.58,
+      "text": "The dark water at the lower right. The straight-edged land along the shore is reclaimed land built out into the bay.",
+      "source": "Point placed on open water in this image; checked against GSI Maps (地理院地図)"
+    }
+  ]
+}
