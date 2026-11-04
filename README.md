@@ -4,25 +4,26 @@
 
 ![desktop](docs/screen-desktop.png)
 
-## 3つのエディション
+## 4つのエディション
 
-同じ衛星画像・地名データのまま、誌面デザインを3案から切り替えられる（画面上部の EDITION。`?ed=newwave|pop|tate` で直接指定でき、選択はブラウザに保存）。
+同じ衛星画像・地名データのまま、誌面デザインを4案から切り替えられる（画面上部の EDITION。`?ed=newwave|pop|tate|web97` で直接指定でき、選択はブラウザに保存）。
 
 | | 方向 | 書体・色 |
 | - | - | - |
 | A NEW WAVE | 硬派なニューウェーブ誌。極太グロテスク、斜めの帯、網点、トンボ、罫線 | Archivo Black / 墨・生成り・朱・コバルト |
-| B POP | メンフィス調のポップ誌。斜体の幾何学サンセリフ、エアブラシ風グラデーション帯、紙吹雪・波線、版ずれの色面 | Jost / 紺・クリーム・蛍光ピンク・ミント・黄 |
-| C TATEGUMI 縦組 | 日本の情報誌。明朝の縦組み誌名「東京地図」、縦組みリード、二重罫、小口の赤罫、地名に漢字併記 | Zen Old Mincho / 墨・生成り・金赤 |
+| B POP | メンフィス調のポップ誌。グラデーション＋太い縁取りの誌名、星形シール、紙吹雪柄の地紙、エアブラシ風の帯 | Jost / 紺・クリーム・蛍光ピンク・ミント・黄 |
+| C TATEGUMI 縦組 | 日本の情報誌。明朝の縦組み誌名「東京地図」、縦組みリード、網掛けの見出し、「保存版」の判、地名に漢字併記 | Zen Old Mincho / 墨・生成り・金赤 |
+| D WEB 1997 | 同じ雑誌が1990年代後半に作った公式ホームページという設定。幅800pxの中央寄せ、グレーの背景、虹色の誌名、流れる告知、立体ボタン、下線付きリンクの目次、日付カウンター、工事中の帯 | Times New Roman / Arial / MS Pゴシック（端末のフォント） |
 
-| B POP | C 縦組 |
-| - | - |
-| ![pop](docs/screen-desktop-pop.png) | ![tate](docs/screen-desktop-tate.png) |
+| B POP | C 縦組 | D WEB 1997（GINZA選択） |
+| - | - | - |
+| ![pop](docs/screen-desktop-pop.png) | ![tate](docs/screen-desktop-tate.png) | ![web97](docs/screen-desktop-web97.png) |
 
 | スマホ A | スマホ B（GINZA選択） | スマホ C |
 | - | - | - |
 | ![phone](docs/screen-phone-top.png) | ![phone pop](docs/screen-phone-pop-ginza.png) | ![phone tate](docs/screen-phone-tate.png) |
 
-装飾はすべて地図の外側のレイヤで、地図画像・ラベル位置はエディションによらず共通。
+装飾はすべて地図の外側のレイヤで、地図画像・ラベル位置はエディションによらず共通。DのWebらしさ（流れる告知など）は D の中だけに閉じ、他の誌面とは混ぜない。流れる告知は `prefers-reduced-motion` で止まる。
 
 ## 操作
 

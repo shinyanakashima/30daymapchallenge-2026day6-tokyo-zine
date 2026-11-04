@@ -12,6 +12,7 @@ const EDITIONS = [
   { id: 'newwave', key: 'A', name: 'NEW WAVE' },
   { id: 'pop', key: 'B', name: 'POP' },
   { id: 'tate', key: 'C', name: 'TATEGUMI', ja: '縦組' },
+  { id: 'web97', key: 'D', name: 'WEB 1997' },
 ] as const
 type Edition = (typeof EDITIONS)[number]['id']
 const isEdition = (v: unknown): v is Edition => EDITIONS.some((e) => e.id === v)
@@ -133,7 +134,30 @@ export default function App() {
           </span>
           <span className="mast__tokyo">TOKYO</span>
           <span className="mast__map">MAP</span>
+          {edition === 'web97' && <span className="mast__online">Online</span>}
         </h1>
+        {edition === 'pop' && (
+          <p className="burst" aria-hidden="true">
+            <span>
+              SATELLITE
+              <br />
+              SPECIAL!
+            </span>
+          </p>
+        )}
+        {edition === 'tate' && (
+          <p className="stamp" lang="ja" aria-hidden="true">
+            保存版
+          </p>
+        )}
+        {edition === 'web97' && (
+          <p className="w97-marquee" aria-hidden="true">
+            <span>
+              Welcome to TOKYO MAP Online! *** Landsat 5 photo of {t.day} {t.monthEn} {t.year}, {t.time} JST *** Select a place
+              from the list *** ようこそ、衛星から見た東京へ ***
+            </span>
+          </p>
+        )}
       </header>
 
       <section className="lead">
@@ -233,6 +257,27 @@ export default function App() {
           <a href={`${import.meta.env.BASE_URL}data/manifest.json`}>manifest.json</a>
         </p>
         <p>Type: Archivo Black, Archivo, IBM Plex Mono, Jost, Zen Old Mincho (SIL Open Font License).</p>
+        {edition === 'web97' && (
+          <div className="w97-extra">
+            <p className="w97-uc">BACK ISSUES: UNDER CONSTRUCTION</p>
+            <p>
+              SCENE DATE{' '}
+              <span className="w97-counter">
+                {scene.acquired_date
+                  .replace(/-/g, '')
+                  .split('')
+                  .map((d, i) => (
+                    <span key={i}>{d}</span>
+                  ))}
+              </span>
+            </p>
+            <p>
+              LINKS: <a href="https://www.usgs.gov/landsat-missions/landsat-5">USGS Landsat 5</a> |{' '}
+              <a href="https://maps.gsi.go.jp/">GSI Maps</a> | <a href="https://30daymapchallenge.com/">#30DayMapChallenge</a>
+            </p>
+            <p className="w97-best">Best viewed at 800 x 600</p>
+          </div>
+        )}
       </footer>
     </div>
   )
