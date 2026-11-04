@@ -2027,3 +2027,1056 @@ button {
     padding-left: 12px;
   }
 }
+
+/* ==================================================================
+   edition switch: PRINT / WEB groups
+   ================================================================== */
+
+.editions__group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-right: 14px;
+}
+
+.editions__glabel {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em;
+  opacity: 0.75;
+}
+
+.entry__key {
+  display: none;
+}
+
+/* ==================================================================
+   E  FLASH 2001 — a Flash-era portal: dark steel, chrome type,
+   pixel captions, instrument brackets
+   ================================================================== */
+
+.page[data-edition='flash'] {
+  --ink: #d8e4f0;
+  --ink-soft: #8fa3ba;
+  --paper: #0a0e16;
+  --paper-deep: #141c2a;
+  --a1: #b6ff00; /* lime */
+  --a2: #00d8ff; /* cyan */
+  --on-a1: #0a0e16;
+  --display: 'Michroma', 'Eurostile', 'Arial Black', sans-serif;
+  --head: 'Michroma', 'Eurostile', Arial, sans-serif;
+  --body: Verdana, Tahoma, sans-serif;
+  --mono: 'Silkscreen', 'Courier New', monospace;
+  --jp: 'DotGothic16', 'MS Gothic', monospace;
+  max-width: 1040px;
+  background:
+    linear-gradient(rgba(0, 216, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(0, 216, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px,
+    radial-gradient(ellipse at 50% 0%, #1b2a44 0%, #0a0e16 60%);
+  border-left: 1px solid #2a3a55;
+  border-right: 1px solid #2a3a55;
+}
+
+.page[data-edition='flash'] .grain,
+.page[data-edition='flash'] .band,
+.page[data-edition='flash'] .dots,
+.page[data-edition='flash'] .trim,
+.page[data-edition='flash'] .confetti {
+  display: none;
+}
+
+.page[data-edition='flash'] .editions {
+  border-bottom-color: #2a3a55;
+  font-family: var(--mono);
+}
+
+.page[data-edition='flash'] .edition,
+.page[data-edition='flash'] .tool,
+.page[data-edition='flash'] .back {
+  border: 1px solid #4a6080;
+  background: linear-gradient(180deg, #3a4a62, #1a2333 50%, #101722 51%, #24324a);
+  color: #d8e4f0;
+  font: 400 10px/1 var(--mono);
+  letter-spacing: 0.08em;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.page[data-edition='flash'] .edition:hover,
+.page[data-edition='flash'] .tool:hover,
+.page[data-edition='flash'] .back:hover {
+  border-color: var(--a2);
+  color: var(--a2);
+  background: #0a0e16;
+}
+
+.page[data-edition='flash'] .edition.is-on {
+  border-color: var(--a1);
+  color: var(--a1);
+  background: #0a0e16;
+}
+
+.page[data-edition='flash'] .edition__key {
+  background: #24324a;
+  color: var(--a2);
+}
+
+.page[data-edition='flash'] .edition.is-on .edition__key {
+  background: var(--a1);
+  color: #0a0e16;
+}
+
+.page[data-edition='flash'] .mast__issue {
+  font: 400 10px/1 var(--mono);
+  color: var(--a2);
+}
+
+.page[data-edition='flash'] .chip {
+  background: transparent;
+  border: 1px solid var(--a2);
+  color: var(--a2);
+}
+
+/* chrome title */
+.page[data-edition='flash'] .mast__title {
+  font-size: clamp(44px, 6.6vw, 84px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  gap: 0 0.3em;
+}
+
+.page[data-edition='flash'] .mast__tokyo,
+.page[data-edition='flash'] .mast__map {
+  background: linear-gradient(180deg, #ffffff 0%, #c9d6e6 40%, #4a5d78 50%, #e8f0ff 62%, #8193ad 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  transform: none;
+  filter: drop-shadow(0 0 6px rgba(0, 216, 255, 0.45));
+}
+
+.page[data-edition='flash'] .mast__map {
+  transform: skewX(-12deg);
+}
+
+.y2k-load {
+  position: relative;
+  margin: 14px 0 0;
+  height: 18px;
+  max-width: 560px;
+  border: 1px solid #4a6080;
+  background: #05070d;
+  overflow: hidden;
+}
+
+.y2k-load__bar {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--a1) 0 10px, transparent 10px 12px);
+  opacity: 0.85;
+}
+
+.y2k-load__text {
+  position: relative;
+  display: block;
+  padding: 0 8px;
+  font: 400 10px/14px var(--mono);
+  color: var(--a1);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.page[data-edition='flash'] .lead {
+  background: transparent;
+}
+
+.page[data-edition='flash'] .lead__head {
+  font: 400 20px/1.25 var(--head);
+  border-top: 1px solid var(--a2);
+  color: #fff;
+}
+
+.page[data-edition='flash'] .lead__ja {
+  font: 14px/1.6 var(--jp);
+  color: var(--ink-soft);
+}
+
+/* instrument brackets around the photo */
+.page[data-edition='flash'] .map-shell {
+  border: 1px solid #4a6080;
+  outline: 0;
+  box-shadow: 0 0 0 4px #0a0e16, 0 0 0 5px #2a3a55, 0 0 24px rgba(0, 216, 255, 0.18);
+}
+
+.page[data-edition='flash'] .map-shell::before {
+  content: '';
+  position: absolute;
+  z-index: 5;
+  inset: -9px;
+  pointer-events: none;
+  --c: var(--a2);
+  background:
+    linear-gradient(var(--c), var(--c)) 0 0 / 22px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 0 / 2px 22px no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 0 / 22px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 0 / 2px 22px no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 100% / 22px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 100% / 2px 22px no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 100% / 22px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 100% / 2px 22px no-repeat;
+}
+
+.page[data-edition='flash'] .caption {
+  font: 400 9px/1.6 var(--mono);
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+
+.page[data-edition='flash'] .caption b {
+  background: var(--a2);
+  color: #0a0e16;
+}
+
+.page[data-edition='flash'] .pin__dot {
+  background: #0a0e16;
+  border: 2px solid var(--a2);
+  box-shadow: 0 0 6px var(--a2);
+}
+
+.page[data-edition='flash'] .pin__label {
+  border: 1px solid var(--a2);
+  font: 400 10px/1 var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.page[data-edition='flash'] .pin__no {
+  background: var(--a2);
+  color: #0a0e16;
+  font: 400 10px/1 var(--mono);
+}
+
+.page[data-edition='flash'] .pin__name {
+  background: rgba(10, 14, 22, 0.88);
+  color: #e8f6ff;
+}
+
+.page[data-edition='flash'] .pin:hover .pin__name,
+.page[data-edition='flash'] .pin.is-selected .pin__name {
+  background: var(--a1);
+  color: #0a0e16;
+}
+
+.page[data-edition='flash'] .pin.is-selected .pin__dot {
+  background: var(--a1);
+  border-color: var(--a1);
+  box-shadow: 0 0 10px var(--a1);
+}
+
+.page[data-edition='flash'] .pin--lead::after {
+  background: var(--a2);
+  box-shadow: none;
+  width: 1px;
+}
+
+.page[data-edition='flash'] .contents,
+.page[data-edition='flash'] .story {
+  background: linear-gradient(180deg, #161f30, #0b111b);
+  border: 1px solid #2a3a55;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  padding: 12px 14px;
+}
+
+.page[data-edition='flash'] .contents__head {
+  font: 400 15px/1 var(--head);
+  color: #fff;
+  border-bottom: 1px solid var(--a2);
+}
+
+.page[data-edition='flash'] .contents__hint {
+  background: transparent;
+  color: var(--a1);
+  font: 400 9px/1 var(--mono);
+}
+
+.page[data-edition='flash'] .entry {
+  border-bottom: 1px solid #22304a;
+  min-height: 40px;
+}
+
+.page[data-edition='flash'] .entry__no {
+  font: 400 10px/1 var(--mono);
+  color: var(--a2);
+}
+
+.page[data-edition='flash'] .entry__name {
+  font: 400 12px/1.2 var(--head);
+  letter-spacing: 0.08em;
+}
+
+.page[data-edition='flash'] .entry__ja {
+  font: 13px/1 var(--jp);
+  color: var(--ink-soft);
+}
+
+.page[data-edition='flash'] .entry:hover {
+  background: rgba(0, 216, 255, 0.12);
+}
+
+.page[data-edition='flash'] .entry.is-selected {
+  background: var(--a1);
+  color: #0a0e16;
+}
+
+.page[data-edition='flash'] .entry.is-selected .entry__no,
+.page[data-edition='flash'] .entry.is-selected .entry__ja {
+  color: #0a0e16;
+}
+
+.page[data-edition='flash'] .story {
+  border-top: 1px solid #2a3a55;
+}
+
+.page[data-edition='flash'] .story__kicker {
+  font: 400 9px/1 var(--mono);
+  color: var(--a2);
+}
+
+.page[data-edition='flash'] .story__no {
+  background: var(--a2);
+  color: #0a0e16;
+}
+
+.page[data-edition='flash'] .story__title {
+  font: 400 20px/1.2 var(--head);
+  color: #fff;
+}
+
+.page[data-edition='flash'] .story__title span {
+  font: 18px/1 var(--jp);
+}
+
+.page[data-edition='flash'] .story__text {
+  font: 13px/1.6 var(--body);
+}
+
+.page[data-edition='flash'] .story__meta,
+.page[data-edition='flash'] .story__src {
+  font: 400 9px/1.6 var(--mono);
+}
+
+.page[data-edition='flash'] .colophon {
+  border-top: 1px solid #2a3a55;
+  font: 400 9px/1.7 var(--mono);
+  letter-spacing: 0.03em;
+}
+
+.page[data-edition='flash'] .colophon a {
+  color: var(--a2);
+}
+
+/* ==================================================================
+   F  WEB 2.0 — glossy, rounded, reflected logo and a beta badge
+   ================================================================== */
+
+.page[data-edition='web2'] {
+  --ink: #333333;
+  --ink-soft: #666666;
+  --paper: #ffffff;
+  --paper-deep: #f2f7e8;
+  --a1: #73b711; /* web 2.0 green */
+  --a2: #ff6c00; /* orange */
+  --on-a1: #ffffff;
+  --display: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Trebuchet MS', Arial, sans-serif;
+  --head: 'Lucida Grande', 'Trebuchet MS', Verdana, sans-serif;
+  --body: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+  --mono: 'Lucida Grande', Verdana, sans-serif;
+  --jp: 'Meiryo', 'メイリオ', 'Hiragino Kaku Gothic ProN', sans-serif;
+  max-width: none;
+  padding-left: max(16px, calc((100% - 980px) / 2));
+  padding-right: max(16px, calc((100% - 980px) / 2));
+  background:
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25) 0 2px, transparent 2px 6px) 0 0 / 100% 300px no-repeat,
+    linear-gradient(180deg, #b5e05b 0, #8cc63f 120px, #e9f5d6 300px, #ffffff 420px);
+}
+
+.page[data-edition='web2'] .grain,
+.page[data-edition='web2'] .band,
+.page[data-edition='web2'] .dots,
+.page[data-edition='web2'] .trim,
+.page[data-edition='web2'] .confetti {
+  display: none;
+}
+
+.page[data-edition='web2'] .editions {
+  border-bottom: 0;
+  font-family: var(--head);
+  letter-spacing: 0;
+  color: #fff;
+}
+
+.page[data-edition='web2'] .edition,
+.page[data-edition='web2'] .tool,
+.page[data-edition='web2'] .back {
+  position: relative;
+  border: 1px solid #5d9a0b;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #f1f8e4 49%, #dcefc0 50%, #eef7e0 100%);
+  color: #3d6b00;
+  font: bold 11px/1 var(--head);
+  letter-spacing: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.page[data-edition='web2'] .edition.is-on,
+.page[data-edition='web2'] .edition:hover,
+.page[data-edition='web2'] .tool:hover,
+.page[data-edition='web2'] .back:hover {
+  background: linear-gradient(180deg, #ffb066 0%, #ff8a1e 49%, #ff6c00 50%, #ff9a3c 100%);
+  border-color: #d35400;
+  color: #fff;
+}
+
+.page[data-edition='web2'] .edition__key {
+  border-radius: 50%;
+  background: #73b711;
+  color: #fff;
+}
+
+.page[data-edition='web2'] .edition.is-on .edition__key {
+  background: #fff;
+  color: #ff6c00;
+}
+
+.page[data-edition='web2'] .editions__glabel {
+  color: #fff;
+  opacity: 1;
+}
+
+.page[data-edition='web2'] .mast {
+  margin-top: 10px;
+  margin-bottom: 44px;
+}
+
+.page[data-edition='web2'] .mast__issue {
+  font: bold 12px/1 var(--head);
+  letter-spacing: 0;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.page[data-edition='web2'] .chip {
+  background: #ff6c00;
+  border-radius: 10px;
+}
+
+/* reflected logo */
+.page[data-edition='web2'] .mast__title {
+  position: relative;
+  font: bold clamp(48px, 7vw, 92px) / 1 var(--display);
+  letter-spacing: -0.04em;
+  gap: 0 0.15em;
+  -webkit-box-reflect: below -6px linear-gradient(transparent 55%, rgba(255, 255, 255, 0.4));
+}
+
+.page[data-edition='web2'] .mast__tokyo {
+  color: #ffffff;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  transform: none;
+}
+
+.page[data-edition='web2'] .mast__map {
+  color: #ff6c00;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  transform: none;
+}
+
+.beta {
+  align-self: flex-start;
+  margin-left: 0.2em;
+  padding: 0.35em 0.6em;
+  font: bold italic 0.18em/1 var(--head);
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(180deg, #ff6aa8 0%, #e6006e 50%, #c4005c 51%, #f0328a 100%);
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: rotate(-12deg);
+}
+
+.page[data-edition='web2'] .lead {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #d6e9b8;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.page[data-edition='web2'] .lead__head {
+  font: bold 20px/1.2 var(--head);
+  border-top: 0;
+  padding-top: 0;
+  color: #4a7d00;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.page[data-edition='web2'] .lead__ja {
+  font: 13px/1.7 var(--jp);
+}
+
+.page[data-edition='web2'] .map-shell {
+  border: 1px solid #c8c8c8;
+  outline: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.page[data-edition='web2'] .caption {
+  font: 11px/1.6 var(--body);
+}
+
+.page[data-edition='web2'] .caption b {
+  background: #73b711;
+  border-radius: 8px;
+}
+
+.page[data-edition='web2'] .pin__dot {
+  background: radial-gradient(circle at 35% 30%, #fff 0, #ff8a1e 45%, #d35400 100%);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.page[data-edition='web2'] .pin__label {
+  border: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  font: bold 11px/1 var(--head);
+  letter-spacing: 0;
+}
+
+.page[data-edition='web2'] .pin__no {
+  background: #73b711;
+  color: #fff;
+  font: bold 10px/1 var(--head);
+}
+
+.page[data-edition='web2'] .pin__name {
+  background: linear-gradient(180deg, #ffffff, #eeeeee);
+  color: #333;
+}
+
+.page[data-edition='web2'] .pin:hover .pin__name,
+.page[data-edition='web2'] .pin.is-selected .pin__name {
+  background: linear-gradient(180deg, #ffb066 0%, #ff6c00 100%);
+  color: #fff;
+}
+
+.page[data-edition='web2'] .pin--lead::after {
+  background: #73b711;
+  box-shadow: none;
+}
+
+.page[data-edition='web2'] .contents,
+.page[data-edition='web2'] .story {
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0 14px 14px;
+  overflow: hidden;
+}
+
+.page[data-edition='web2'] .contents__head {
+  margin: 0 -14px 12px;
+  padding: 10px 14px;
+  font: bold 15px/1 var(--head);
+  letter-spacing: 0;
+  background: linear-gradient(180deg, #fafafa, #e6e6e6);
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.page[data-edition='web2'] .contents__hint {
+  background: #ff6c00;
+  border-radius: 8px;
+  font: bold 10px/1 var(--head);
+  letter-spacing: 0;
+}
+
+/* places as pill tags */
+.page[data-edition='web2'] .contents__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page[data-edition='web2'] .entry {
+  display: inline-flex;
+  width: auto;
+  min-height: 36px;
+  gap: 6px;
+  padding: 4px 14px 4px 6px;
+  border: 1px solid #b9d98a;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f9e8 49%, #e3f1cc 50%, #f1f8e6 100%);
+}
+
+.page[data-edition='web2'] .entry__no {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  background: #73b711;
+  color: #fff;
+  font: bold 10px/1 var(--head);
+}
+
+.page[data-edition='web2'] .entry__name {
+  font: bold 13px/1 var(--head);
+  letter-spacing: 0;
+  color: #3d6b00;
+}
+
+.page[data-edition='web2'] .entry__ja {
+  font: 11px/1 var(--jp);
+}
+
+.page[data-edition='web2'] .entry:hover,
+.page[data-edition='web2'] .entry.is-selected {
+  background: linear-gradient(180deg, #ffb066 0%, #ff8a1e 49%, #ff6c00 50%, #ff9a3c 100%);
+  border-color: #d35400;
+}
+
+.page[data-edition='web2'] .entry:hover .entry__name,
+.page[data-edition='web2'] .entry.is-selected .entry__name,
+.page[data-edition='web2'] .entry:hover .entry__ja,
+.page[data-edition='web2'] .entry.is-selected .entry__ja {
+  color: #fff;
+}
+
+.page[data-edition='web2'] .entry.is-selected .entry__no {
+  background: #fff;
+  color: #ff6c00;
+}
+
+.page[data-edition='web2'] .story__kicker {
+  margin: 0 -14px 12px;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #fafafa, #e6e6e6);
+  border-bottom: 1px solid #d0d0d0;
+  font: bold 11px/1 var(--head);
+  letter-spacing: 0.04em;
+}
+
+.page[data-edition='web2'] .story__no {
+  background: #73b711;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.page[data-edition='web2'] .story__title {
+  font: bold 24px/1.1 var(--head);
+  letter-spacing: -0.02em;
+  color: #4a7d00;
+}
+
+.page[data-edition='web2'] .story__text {
+  font: 14px/1.6 var(--body);
+}
+
+.page[data-edition='web2'] .story__meta,
+.page[data-edition='web2'] .story__src {
+  font: 11px/1.5 var(--body);
+}
+
+.page[data-edition='web2'] .colophon {
+  border-top: 1px solid #d0d0d0;
+  font: 11px/1.6 var(--body);
+}
+
+/* ==================================================================
+   G  KEITAI 2002 — an i-mode style page: one narrow column,
+   coloured header bars, [1]-[8] access keys
+   ================================================================== */
+
+.page[data-edition='keitai'] {
+  --ink: #000000;
+  --ink-soft: #333333;
+  --paper: #ffffff;
+  --paper-deep: #fff2cc;
+  --a1: #ff6600;
+  --a2: #0000ff;
+  --on-a1: #ffffff;
+  --display: 'MS PGothic', 'Osaka', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --head: var(--display);
+  --body: var(--display);
+  --mono: var(--display);
+  --jp: var(--display);
+  max-width: 360px;
+  padding: 10px 12px 20px;
+  background: #ffffff;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'editions'
+    'mast'
+    'lead'
+    'spread'
+    'ktop'
+    'colophon';
+  align-items: start;
+  font-size: 14px;
+  box-shadow: 0 0 0 1px #999;
+}
+
+html:has(.page[data-edition='keitai']),
+html:has(.page[data-edition='keitai']) body {
+  background: #d9d9d9;
+}
+
+.page[data-edition='keitai'] .grain,
+.page[data-edition='keitai'] .band,
+.page[data-edition='keitai'] .dots,
+.page[data-edition='keitai'] .trim,
+.page[data-edition='keitai'] .confetti {
+  display: none;
+}
+
+.page[data-edition='keitai'] .editions {
+  font: 11px/1 var(--display);
+  letter-spacing: 0;
+  border-bottom: 1px dashed #999;
+}
+
+.page[data-edition='keitai'] .editions__label {
+  width: 100%;
+}
+
+.page[data-edition='keitai'] .editions__group {
+  margin-right: 0;
+}
+
+.page[data-edition='keitai'] .edition,
+.page[data-edition='keitai'] .tool,
+.page[data-edition='keitai'] .back {
+  min-height: 28px;
+  border: 1px solid #999;
+  border-radius: 0;
+  background: #f2f2f2;
+  color: #000;
+  font: 12px/1 var(--display);
+  letter-spacing: 0;
+}
+
+.page[data-edition='keitai'] .edition.is-on {
+  background: #ff6600;
+  color: #fff;
+  border-color: #ff6600;
+}
+
+.page[data-edition='keitai'] .edition__key {
+  width: auto;
+  height: auto;
+  background: none;
+  color: inherit;
+}
+
+.page[data-edition='keitai'] .edition.is-on .edition__key {
+  background: none;
+  color: #fff;
+}
+
+.page[data-edition='keitai'] .mast {
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.page[data-edition='keitai'] .mast__issue {
+  margin: 0 0 6px;
+  font: 12px/1.3 var(--display);
+  letter-spacing: 0;
+}
+
+.page[data-edition='keitai'] .chip {
+  background: #ff0000;
+}
+
+.page[data-edition='keitai'] .mast__title {
+  justify-content: center;
+  font: bold 34px/1.1 var(--display);
+  letter-spacing: 0;
+  gap: 0 0.3em;
+  background: #000099;
+  padding: 6px 0;
+}
+
+.page[data-edition='keitai'] .mast__tokyo {
+  color: #ffff00;
+  text-shadow: none;
+}
+
+.page[data-edition='keitai'] .mast__map {
+  color: #ffffff;
+  text-shadow: none;
+  transform: none;
+}
+
+.page[data-edition='keitai'] .lead {
+  background: transparent;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.page[data-edition='keitai'] .lead__head {
+  font: bold 14px/1.4 var(--display);
+  border-top: 0;
+  padding: 0;
+  margin: 0 0 4px;
+  color: #cc0000;
+}
+
+.page[data-edition='keitai'] .lead__head br {
+  display: none;
+}
+
+.page[data-edition='keitai'] .lead__head::before {
+  content: '★';
+  margin-right: 0.3em;
+}
+
+.page[data-edition='keitai'] .lead__ja {
+  font: 13px/1.5 var(--display);
+  color: #000;
+}
+
+.page[data-edition='keitai'] .spread {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'plate'
+    'contents'
+    'story';
+  row-gap: 10px;
+}
+
+.page[data-edition='keitai'] .plate {
+  width: 100%;
+  min-width: 0;
+}
+
+.page[data-edition='keitai'] .map-shell {
+  border: 1px solid #000;
+  outline: 0;
+  margin: 0;
+}
+
+.page[data-edition='keitai'] .map-shell::before {
+  display: none;
+}
+
+.page[data-edition='keitai'] .tool {
+  height: 28px;
+  min-width: 28px;
+}
+
+.page[data-edition='keitai'] .caption {
+  font: 11px/1.5 var(--display);
+  color: #333;
+}
+
+.page[data-edition='keitai'] .caption b {
+  background: #000099;
+}
+
+.page[data-edition='keitai'] .pin__dot {
+  background: #ff0000;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px #000;
+}
+
+.page[data-edition='keitai'] .pin__label {
+  border: 1px solid #000;
+  font: bold 12px/1 var(--display);
+  letter-spacing: 0;
+}
+
+.page[data-edition='keitai'] .pin__no {
+  background: #000099;
+  color: #fff;
+  font: bold 11px/1 var(--display);
+}
+
+.page[data-edition='keitai'] .pin__name,
+.page[data-edition='keitai'] .pin:hover .pin__name {
+  background: #ffff99;
+  color: #000;
+}
+
+.page[data-edition='keitai'] .pin.is-selected .pin__name {
+  background: #ff6600;
+  color: #fff;
+}
+
+.page[data-edition='keitai'] .pin--lead::after {
+  background: #000;
+  box-shadow: none;
+  width: 1px;
+}
+
+/* coloured header bars */
+.page[data-edition='keitai'] .contents__head,
+.page[data-edition='keitai'] .story__kicker {
+  display: block;
+  margin: 0 0 6px;
+  padding: 4px 6px;
+  background: #ff9900;
+  color: #fff;
+  font: bold 14px/1.2 var(--display);
+  letter-spacing: 0;
+  border: 0;
+}
+
+.page[data-edition='keitai'] .contents__head::before {
+  content: '▼';
+  margin-right: 0.2em;
+}
+
+.page[data-edition='keitai'] .contents__hint {
+  display: block;
+  background: transparent;
+  color: #fff;
+  font: 11px/1.3 var(--display);
+  letter-spacing: 0;
+  padding: 0;
+}
+
+.page[data-edition='keitai'] .contents {
+  background: transparent;
+}
+
+.page[data-edition='keitai'] .contents__list {
+  display: block;
+}
+
+.page[data-edition='keitai'] .entry {
+  display: block;
+  min-height: 34px;
+  padding: 6px 2px;
+  border-bottom: 1px dashed #ccc;
+  color: #0000ff;
+  font: 15px/1.4 var(--display);
+}
+
+.page[data-edition='keitai'] .entry__no {
+  display: none;
+}
+
+.page[data-edition='keitai'] .entry__key {
+  display: inline;
+  color: #000;
+  margin-right: 0.2em;
+}
+
+.page[data-edition='keitai'] .entry__name,
+.page[data-edition='keitai'] .entry__ja {
+  display: inline;
+  font: inherit;
+  letter-spacing: 0;
+  color: inherit;
+  text-decoration: underline;
+  margin-right: 0.3em;
+}
+
+.page[data-edition='keitai'] .entry:hover {
+  background: #fff2cc;
+}
+
+.page[data-edition='keitai'] .entry.is-selected {
+  background: #ffff99;
+  color: #800080;
+}
+
+.page[data-edition='keitai'] .entry.is-selected .entry__ja {
+  color: #800080;
+}
+
+.page[data-edition='keitai'] .story {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.page[data-edition='keitai'] .story__no {
+  background: none;
+  color: #fff;
+  padding: 0;
+  margin-right: 4px;
+}
+
+.page[data-edition='keitai'] .story__no::before {
+  content: '■';
+}
+
+.page[data-edition='keitai'] .story__title {
+  font: bold 18px/1.3 var(--display);
+  color: #000099;
+}
+
+.page[data-edition='keitai'] .story__title span {
+  font: bold 16px/1 var(--display);
+}
+
+.page[data-edition='keitai'] .story__text {
+  font: 14px/1.6 var(--display);
+}
+
+.page[data-edition='keitai'] .story__meta,
+.page[data-edition='keitai'] .story__src {
+  font: 12px/1.4 var(--display);
+}
+
+.k-top {
+  grid-area: ktop;
+  position: relative;
+  z-index: 2;
+  margin: 12px 0 0;
+  text-align: center;
+}
+
+.k-top button {
+  min-height: 34px;
+  border: 0;
+  background: none;
+  color: #0000ff;
+  text-decoration: underline;
+  font: 15px/1.4 var(--display);
+  cursor: pointer;
+}
+
+.page[data-edition='keitai'] .colophon {
+  columns: 1;
+  border-top: 1px dashed #999;
+  font: 11px/1.5 var(--display);
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  .page[data-edition='flash'] .y2k-load {
+    max-width: none;
+  }
+
+  .page[data-edition='web2'] .contents__list {
+    display: flex;
+  }
+
+  .page[data-edition='keitai'] {
+    max-width: none;
+    box-shadow: none;
+  }
+}

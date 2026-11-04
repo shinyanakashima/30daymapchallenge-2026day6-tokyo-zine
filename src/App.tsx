@@ -9,11 +9,15 @@ const manifest = manifestJson as unknown as Manifest
 const places = placesJson.places as Place[]
 
 const EDITIONS = [
-  { id: 'newwave', key: 'A', name: 'NEW WAVE' },
-  { id: 'pop', key: 'B', name: 'POP' },
-  { id: 'tate', key: 'C', name: 'TATEGUMI', ja: '縦組' },
-  { id: 'web97', key: 'D', name: 'WEB 1997' },
+  { id: 'newwave', group: 'PRINT', key: 'A', name: 'NEW WAVE' },
+  { id: 'pop', group: 'PRINT', key: 'B', name: 'POP' },
+  { id: 'tate', group: 'PRINT', key: 'C', name: 'TATEGUMI', ja: '縦組' },
+  { id: 'web97', group: 'WEB', key: 'D', name: 'WEB 1997' },
+  { id: 'flash', group: 'WEB', key: 'E', name: 'FLASH 2001' },
+  { id: 'web2', group: 'WEB', key: 'F', name: 'WEB 2.0' },
+  { id: 'keitai', group: 'WEB', key: 'G', name: 'KEITAI 2002', ja: 'ケータイ' },
 ] as const
+const GROUPS = ['PRINT', 'WEB'] as const
 type Edition = (typeof EDITIONS)[number]['id']
 const isEdition = (v: unknown): v is Edition => EDITIONS.some((e) => e.id === v)
 
@@ -75,10 +79,15 @@ export default function App() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') fullView()
+      // KEITAI edition: number keys pick places, 0 returns to the full view (i-mode style access keys)
+      if (edition !== 'keitai' || e.ctrlKey || e.metaKey || e.altKey) return
+      if (e.key === '0') fullView()
+      const n = Number(e.key)
+      if (n >= 1 && n <= places.length) select(places[n - 1].id)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [fullView])
+  }, [fullView, select, edition])
 
   const bandText = `TOKYO · ${t.day} ${t.monthEn} ${t.year} · ${t.time} JST · SEEN FROM 705 KM · `
 
@@ -104,7 +113,10 @@ export default function App() {
 
       <div className="editions" role="radiogroup" aria-label="Edition (page design)">
         <span className="editions__label">EDITION</span>
-        {EDITIONS.map((e) => (
+        {GROUPS.map((g) => (
+          <span key={g} className="editions__group" role="presentation">
+            <span className="editions__glabel">{g}</span>
+            {EDITIONS.filter((e) => e.group === g).map((e) => (
           <button
             key={e.id}
             type="button"
@@ -121,6 +133,8 @@ export default function App() {
               </span>
             )}
           </button>
+            ))}
+          </span>
         ))}
       </div>
 
@@ -135,7 +149,20 @@ export default function App() {
           <span className="mast__tokyo">TOKYO</span>
           <span className="mast__map">MAP</span>
           {edition === 'web97' && <span className="mast__online">Online</span>}
+          {edition === 'web2' && (
+            <span className="beta" aria-hidden="true">
+              beta
+            </span>
+          )}
         </h1>
+        {edition === 'flash' && (
+          <p className="y2k-load" aria-hidden="true">
+            <span className="y2k-load__bar" />
+            <span className="y2k-load__text">
+              SCENE LOADED 100% / LANDSAT-5 TM / {scene.acquired_date} {utcTime(scene.acquired_utc)} UTC
+            </span>
+          </p>
+        )}
         {edition === 'pop' && (
           <p className="burst" aria-hidden="true">
             <span>
@@ -203,14 +230,18 @@ export default function App() {
             CONTENTS <span className="contents__hint">SELECT A PLACE</span>
           </h3>
           <ol className="contents__list">
-            {places.map((p) => (
+            {places.map((p, i) => (
               <li key={p.id}>
                 <button
                   type="button"
                   className={`entry${p.id === selectedId ? ' is-selected' : ''}`}
                   aria-pressed={p.id === selectedId}
+                  aria-keyshortcuts={edition === 'keitai' ? String(i + 1) : undefined}
                   onClick={() => (p.id === selectedId ? fullView() : select(p.id))}
                 >
+                  <span className="entry__key" aria-hidden="true">
+                    [{i + 1}]
+                  </span>
                   <span className="entry__no">{p.no}</span>
                   <span className="entry__name">{p.name}</span>
                   <span className="entry__ja" lang="ja">
@@ -255,6 +286,14 @@ export default function App() {
         </article>
       </main>
 
+      {edition === 'keitai' && (
+        <p className="k-top">
+          <button type="button" onClick={fullView} aria-keyshortcuts="0">
+            [0] 全景に戻る / FULL VIEW
+          </button>
+        </p>
+      )}
+
       <footer className="colophon" id="about">
         <p>
           TOKYO MAP is a fictional magazine made for #30DayMapChallenge 2026, Day 6 “Vintage”. Not a reproduction of any real
@@ -264,7 +303,7 @@ export default function App() {
           Image: {scene.product_id} · {scene.processing_level} · source CRS {scene.source_crs} · {manifest.license}.{' '}
           <a href={`${import.meta.env.BASE_URL}data/manifest.json`}>manifest.json</a>
         </p>
-        <p>Type: Archivo Black, Archivo, IBM Plex Mono, Jost, Zen Old Mincho (SIL Open Font License).</p>
+        <p>Type: Archivo Black, Archivo, IBM Plex Mono, Jost, Zen Old Mincho, Michroma, Silkscreen, DotGothic16 (SIL Open Font License).</p>
         {edition === 'web97' && (
           <div className="w97-extra">
             <h4 className="w97-h">更新履歴 WHAT'S NEW</h4>

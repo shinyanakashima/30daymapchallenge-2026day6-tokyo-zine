@@ -4,9 +4,9 @@
 
 ![desktop](docs/screen-desktop.png)
 
-## 4つのエディション
+## 7つのエディション
 
-同じ衛星画像・地名データのまま、誌面デザインを4案から切り替えられる（画面上部の EDITION。`?ed=newwave|pop|tate|web97` で直接指定でき、選択はブラウザに保存）。
+同じ衛星画像・地名データのまま、誌面デザインを7案から切り替えられる（画面上部の EDITION。紙の PRINT 3案と Web の WEB 4案。`?ed=newwave|pop|tate|web97|flash|web2|keitai` で直接指定でき、選択はブラウザに保存）。
 
 | | 方向 | 書体・色 |
 | - | - | - |
@@ -14,10 +14,17 @@
 | B POP | メンフィス調のポップ誌。グラデーション＋太い縁取りの誌名、星形シール、紙吹雪柄の地紙、エアブラシ風の帯 | Jost / 紺・クリーム・蛍光ピンク・ミント・黄 |
 | C TATEGUMI 縦組 | 日本の情報誌。明朝の縦組み誌名「東京地図」、縦組みリード、網掛けの見出し、「保存版」の判、地名に漢字併記 | Zen Old Mincho / 墨・生成り・金赤 |
 | D WEB 1997 | 同じ雑誌が1990年代後半にWYSIWYGのページ作成ソフトで作った公式ホームページという設定。幅800pxの中央寄せ、パステル水色の背景、グラデーションと白フチのロゴ、ツヤのあるボタンのナビと左メニュー、グラデーションの見出し帯、流れる告知、更新履歴の NEW!、撮影日カウンター、工事中の帯 | Arial Black / MS Pゴシック（端末のフォント） |
+| E FLASH 2001 | Flash全盛期のポータル風。暗い鋼色の地に方眼、クロームの誌名、ドット文字のキャプション、読み込みバー、計器風の四隅の括弧 | Michroma / Silkscreen / DotGothic16 / 黒紺・シアン・ライム |
+| F WEB 2.0 | 2007年ごろのWeb 2.0風。黄緑のグラデーションとピンストライプ、床に映り込む誌名、beta バッジ、角丸の箱、ツヤのあるタグ状の目次 | Lucida Grande / Meiryo（端末のフォント） / 黄緑・オレンジ |
+| G KEITAI 2002 ケータイ | iモード風の幅360pxの1カラム。色帯の見出し、[1]〜[8]の番号付きリンク。**数字キー1〜8で地名を選び、0で全景に戻る**（このエディションのみ） | MS Pゴシック（端末のフォント） |
 
 | B POP | C 縦組 | D WEB 1997（GINZA選択） |
 | - | - | - |
 | ![pop](docs/screen-desktop-pop.png) | ![tate](docs/screen-desktop-tate.png) | ![web97](docs/screen-desktop-web97.png) |
+
+| E FLASH 2001 | F WEB 2.0 | G ケータイ（GINZA選択） |
+| - | - | - |
+| ![flash](docs/screen-desktop-flash.png) | ![web2](docs/screen-desktop-web2.png) | ![keitai](docs/screen-desktop-keitai.png) |
 
 | スマホ A | スマホ B（GINZA選択） | スマホ C |
 | - | - | - |
@@ -96,7 +103,7 @@ MapLibre の `image` ソースに manifest の4隅座標で配置する。
 - 地名ラベルは MapLibre Marker（HTML）で、地図の投影と同じ変換で配置。誌面装飾（斜めの帯・網点・紙の粒子・色版ずれ）は地図の外側の別レイヤ。地図本体には重ねない。
 - 地名の操作は目次ボタン（キーボード・スクリーンリーダー対応、`aria-pressed`）が担い、地図上のラベルはその鏡像。
 - 幅960px以下は縦組みに組み直し、地図の幅が480px未満では地図上は番号のみ（選択中のみ名称表示）。
-- フォント：Archivo Black / Archivo / IBM Plex Mono / Jost / Zen Old Mincho（いずれも SIL Open Font License、@fontsource で同梱）。
+- フォント：Archivo Black / Archivo / IBM Plex Mono / Jost / Zen Old Mincho / Michroma / Silkscreen / DotGothic16（いずれも SIL Open Font License、@fontsource で同梱）。D・F・G は当時の雰囲気を出すため端末のフォント（MS Pゴシック、Meiryo など）を優先し、無い環境では代替フォントで表示される。
 
 ## 再現手順
 
