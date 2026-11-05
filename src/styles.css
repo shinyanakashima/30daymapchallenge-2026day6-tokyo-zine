@@ -3080,3 +3080,783 @@ html:has(.page[data-edition='keitai']) body {
     box-shadow: none;
   }
 }
+
+/* ==================================================================
+   BBS 1990 — a Japanese pasokon-tsushin terminal (PC-98 style
+   16-colour text screen); number keys pick places
+   ================================================================== */
+
+.page[data-edition='bbs'] {
+  --ink: #ffffff;
+  --ink-soft: #c0c0c0;
+  --paper: #000000;
+  --paper-deep: #000080;
+  --a1: #ffff00;
+  --a2: #00ffff;
+  --on-a1: #000000;
+  --t: 'DotGothic16', 'MS Gothic', 'Osaka-Mono', monospace;
+  --display: var(--t);
+  --head: var(--t);
+  --body: var(--t);
+  --mono: var(--t);
+  --jp: var(--t);
+  max-width: 1000px;
+  background: #000;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'editions'
+    'mast'
+    'lead'
+    'spread'
+    'ktop'
+    'status'
+    'colophon';
+  align-items: start;
+  font: 16px/1.5 var(--t);
+  -webkit-font-smoothing: none;
+}
+
+html:has(.page[data-edition='bbs']),
+html:has(.page[data-edition='bbs']) body {
+  background: #000;
+}
+
+.page[data-edition='bbs'] .grain,
+.page[data-edition='bbs'] .band,
+.page[data-edition='bbs'] .dots,
+.page[data-edition='bbs'] .trim,
+.page[data-edition='bbs'] .confetti {
+  display: none;
+}
+
+.page[data-edition='bbs'] .editions {
+  border-bottom: 1px solid #00ffff;
+  font: 14px/1 var(--t);
+  letter-spacing: 0;
+  color: #00ffff;
+}
+
+.page[data-edition='bbs'] .editions__glabel {
+  font: 13px/1 var(--t);
+  opacity: 1;
+}
+
+.page[data-edition='bbs'] .edition,
+.page[data-edition='bbs'] .tool,
+.page[data-edition='bbs'] .back,
+.page[data-edition='bbs'] .k-top button {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #ffffff;
+  font: 15px/1 var(--t);
+  letter-spacing: 0;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.page[data-edition='bbs'] .edition:hover,
+.page[data-edition='bbs'] .tool:hover,
+.page[data-edition='bbs'] .back:hover,
+.page[data-edition='bbs'] .k-top button:hover,
+.page[data-edition='bbs'] .edition.is-on {
+  background: #ffffff;
+  color: #000000;
+}
+
+.page[data-edition='bbs'] .edition__key,
+.page[data-edition='bbs'] .edition.is-on .edition__key {
+  width: auto;
+  background: none;
+  color: #ffff00;
+}
+
+.page[data-edition='bbs'] .edition.is-on .edition__key {
+  color: #000080;
+}
+
+.page[data-edition='bbs'] .mast {
+  margin: 4px 0 8px;
+}
+
+.page[data-edition='bbs'] .mast__issue {
+  font: 15px/1.4 var(--t);
+  letter-spacing: 0;
+  color: #00ff00;
+}
+
+.page[data-edition='bbs'] .chip {
+  background: #ff00ff;
+  color: #000;
+}
+
+.page[data-edition='bbs'] .mast__title {
+  font: 64px/1 var(--t);
+  letter-spacing: 0.06em;
+  gap: 0 0.5em;
+}
+
+.page[data-edition='bbs'] .mast__tokyo {
+  color: #ffff00;
+  text-shadow: none;
+}
+
+.page[data-edition='bbs'] .mast__map {
+  color: #00ffff;
+  text-shadow: none;
+  transform: none;
+}
+
+.bbs-banner {
+  margin: 10px 0 0;
+  font: 15px/1.6 var(--t);
+  color: #00ff00;
+  white-space: pre-wrap;
+}
+
+.page[data-edition='bbs'] .lead {
+  background: transparent;
+  margin: 0 0 14px;
+}
+
+.page[data-edition='bbs'] .lead__head {
+  font: 18px/1.5 var(--t);
+  color: #00ffff;
+  border-top: 1px dashed #00ffff;
+  padding-top: 8px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.page[data-edition='bbs'] .lead__head br {
+  display: none;
+}
+
+.page[data-edition='bbs'] .lead__head::before {
+  content: '■ ';
+}
+
+.page[data-edition='bbs'] .lead__ja {
+  font: 16px/1.6 var(--t);
+  color: #ffffff;
+}
+
+.page[data-edition='bbs'] .spread {
+  column-gap: 28px;
+}
+
+.page[data-edition='bbs'] .plate {
+  width: min(calc(100vw - 2 * var(--gutter) - 400px), calc((100svh - 300px) * 0.988), 600px);
+  padding-top: 26px;
+}
+
+/* the photo as a received image file in a ruled window */
+.page[data-edition='bbs'] .map-shell {
+  border: 4px double #ffffff;
+  outline: 0;
+}
+
+.page[data-edition='bbs'] .map-shell::before {
+  content: 'TOKYO.MAG ─ 受信完了';
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  bottom: 100%;
+  padding: 2px 6px;
+  background: #000080;
+  color: #ffffff;
+  font: 14px/1.4 var(--t);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.page[data-edition='bbs'] .caption {
+  font: 13px/1.6 var(--t);
+  color: #00ff00;
+}
+
+.page[data-edition='bbs'] .caption b {
+  background: #00ff00;
+  color: #000;
+}
+
+.page[data-edition='bbs'] .pin__dot {
+  border-radius: 0;
+  background: #ffff00;
+  border: 2px solid #000;
+  box-shadow: 0 0 0 1px #ffff00;
+}
+
+.page[data-edition='bbs'] .pin__label {
+  border: 1px solid #ffffff;
+  font: 13px/1 var(--t);
+  letter-spacing: 0;
+}
+
+.page[data-edition='bbs'] .pin__no {
+  background: #000;
+  color: #ffff00;
+  font: 13px/1 var(--t);
+}
+
+.page[data-edition='bbs'] .pin__name,
+.page[data-edition='bbs'] .pin:hover .pin__name {
+  background: #000;
+  color: #fff;
+}
+
+.page[data-edition='bbs'] .pin.is-selected .pin__name {
+  background: #fff;
+  color: #000;
+}
+
+.page[data-edition='bbs'] .pin.is-selected .pin__dot {
+  background: #ff00ff;
+  box-shadow: 0 0 0 1px #ff00ff;
+}
+
+.page[data-edition='bbs'] .pin--lead::after {
+  background: #ffff00;
+  box-shadow: none;
+  width: 1px;
+}
+
+.page[data-edition='bbs'] .contents,
+.page[data-edition='bbs'] .story {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.page[data-edition='bbs'] .contents__head,
+.page[data-edition='bbs'] .story__kicker {
+  display: block;
+  margin: 0 0 8px;
+  padding: 2px 6px;
+  background: #000080;
+  color: #ffffff;
+  font: 16px/1.4 var(--t);
+  letter-spacing: 0;
+  border: 0;
+}
+
+.page[data-edition='bbs'] .contents__head::before {
+  content: '─ ';
+}
+
+.page[data-edition='bbs'] .contents__hint {
+  float: right;
+  background: transparent;
+  color: #ffff00;
+  font: 14px/1.6 var(--t);
+  letter-spacing: 0;
+  padding: 0;
+}
+
+.page[data-edition='bbs'] .contents__list {
+  display: block;
+}
+
+.page[data-edition='bbs'] .entry {
+  display: block;
+  min-height: 34px;
+  padding: 4px 6px;
+  border: 0;
+  color: #ffffff;
+  font: 17px/1.5 var(--t);
+}
+
+.page[data-edition='bbs'] .entry__no {
+  display: none;
+}
+
+.page[data-edition='bbs'] .entry__key {
+  display: inline;
+  color: #ffff00;
+  margin-right: 0.6em;
+}
+
+.page[data-edition='bbs'] .entry__name,
+.page[data-edition='bbs'] .entry__ja {
+  display: inline;
+  font: inherit;
+  letter-spacing: 0.02em;
+  color: inherit;
+  margin-right: 0.8em;
+}
+
+.page[data-edition='bbs'] .entry__ja {
+  color: #00ffff;
+}
+
+.page[data-edition='bbs'] .entry:hover,
+.page[data-edition='bbs'] .entry.is-selected {
+  background: #ffffff;
+  color: #000000;
+}
+
+.page[data-edition='bbs'] .entry:hover .entry__ja,
+.page[data-edition='bbs'] .entry.is-selected .entry__ja,
+.page[data-edition='bbs'] .entry:hover .entry__key,
+.page[data-edition='bbs'] .entry.is-selected .entry__key {
+  color: #000080;
+}
+
+.page[data-edition='bbs'] .story {
+  margin-top: 8px;
+}
+
+.page[data-edition='bbs'] .story__no {
+  background: none;
+  color: #ffff00;
+  padding: 0;
+}
+
+.page[data-edition='bbs'] .story__no::before {
+  content: '#00';
+}
+
+.page[data-edition='bbs'] .story__title {
+  font: 22px/1.4 var(--t);
+  color: #ffff00;
+}
+
+.page[data-edition='bbs'] .story__title span {
+  font: 20px/1 var(--t);
+  color: #00ffff;
+}
+
+.page[data-edition='bbs'] .story__text {
+  font: 16px/1.7 var(--t);
+}
+
+.page[data-edition='bbs'] .story__meta,
+.page[data-edition='bbs'] .story__src {
+  font: 14px/1.5 var(--t);
+  color: #c0c0c0;
+}
+
+.page[data-edition='bbs'] .k-top {
+  text-align: left;
+}
+
+.bbs-status {
+  grid-area: status;
+  position: relative;
+  z-index: 2;
+  margin: 14px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  padding: 2px 8px;
+  background: #00aaaa;
+  color: #000;
+  font: 15px/1.6 'DotGothic16', monospace;
+}
+
+.page[data-edition='bbs'] .colophon {
+  columns: 1;
+  border-top: 1px dashed #00ffff;
+  font: 13px/1.6 var(--t);
+  color: #c0c0c0;
+}
+
+.page[data-edition='bbs'] .colophon a {
+  color: #00ffff;
+}
+
+/* ==================================================================
+   WEB 1994 — plain HTML in an early graphical browser:
+   grey background, default type, linked image border
+   ================================================================== */
+
+.page[data-edition='web94'] {
+  --ink: #000000;
+  --ink-soft: #000000;
+  --paper: #c0c0c0;
+  --paper-deep: #b0b0b0;
+  --a1: #0000ee;
+  --a2: #0000ee;
+  --on-a1: #ffffff;
+  --t: 'Times New Roman', Times, 'MS PMincho', serif;
+  --display: var(--t);
+  --head: var(--t);
+  --body: var(--t);
+  --mono: 'Courier New', Courier, monospace;
+  --jp: 'MS PMincho', 'Hiragino Mincho ProN', serif;
+  max-width: none;
+  padding: 8px 8px 24px;
+  background: #c0c0c0;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'editions'
+    'mast'
+    'lead'
+    'spread'
+    'colophon';
+  align-items: start;
+  font: 16px/1.2 var(--t);
+  -webkit-font-smoothing: auto;
+}
+
+html:has(.page[data-edition='web94']),
+html:has(.page[data-edition='web94']) body {
+  background: #c0c0c0;
+}
+
+.page[data-edition='web94'] .grain,
+.page[data-edition='web94'] .band,
+.page[data-edition='web94'] .dots,
+.page[data-edition='web94'] .trim,
+.page[data-edition='web94'] .confetti {
+  display: none;
+}
+
+/* default form buttons */
+.page[data-edition='web94'] .edition,
+.page[data-edition='web94'] .tool,
+.page[data-edition='web94'] .back {
+  min-height: 24px;
+  padding: 2px 8px;
+  border: 2px outset #e0e0e0;
+  border-radius: 0;
+  background: #c0c0c0;
+  color: #000;
+  font: 13px/1 Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+
+.page[data-edition='web94'] .edition.is-on,
+.page[data-edition='web94'] .edition:active,
+.page[data-edition='web94'] .tool:active,
+.page[data-edition='web94'] .back:active {
+  border-style: inset;
+  background: #b0b0b0;
+  color: #000;
+}
+
+.page[data-edition='web94'] .edition__key,
+.page[data-edition='web94'] .edition.is-on .edition__key {
+  width: auto;
+  height: auto;
+  background: none;
+  color: #000;
+}
+
+.page[data-edition='web94'] .editions {
+  border-bottom: 0;
+  font: 13px/1 Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+.page[data-edition='web94'] .mast {
+  margin: 0;
+}
+
+.page[data-edition='web94'] .mast__issue {
+  order: 2;
+  margin: 0 0 16px;
+  font: 16px/1.2 var(--t);
+  letter-spacing: 0;
+}
+
+.page[data-edition='web94'] .chip {
+  background: none;
+  color: #000;
+  padding: 0;
+  margin-right: 4px;
+}
+
+.page[data-edition='web94'] .mast {
+  display: flex;
+  flex-direction: column;
+}
+
+/* <h1> */
+.page[data-edition='web94'] .mast__title {
+  order: 1;
+  margin: 10px 0 14px;
+  font: bold 32px/1.1 var(--t);
+  letter-spacing: 0;
+  gap: 0 0.25em;
+}
+
+.page[data-edition='web94'] .mast__tokyo,
+.page[data-edition='web94'] .mast__map {
+  color: #000;
+  text-shadow: none;
+  transform: none;
+}
+
+/* <h2> + <p> + <hr> */
+.page[data-edition='web94'] .lead {
+  background: transparent;
+  margin: 0 0 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px groove #f0f0f0;
+}
+
+.page[data-edition='web94'] .lead__head {
+  font: bold 24px/1.2 var(--t);
+  text-transform: none;
+  letter-spacing: 0;
+  border-top: 0;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.page[data-edition='web94'] .lead__head br {
+  display: none;
+}
+
+.page[data-edition='web94'] .lead__ja {
+  font: 16px/1.3 var(--jp);
+  color: #000;
+}
+
+.page[data-edition='web94'] .spread {
+  display: block;
+}
+
+.page[data-edition='web94'] .plate {
+  width: min(512px, 100%);
+  min-width: 0;
+  justify-self: start;
+  margin: 0 0 16px;
+}
+
+/* <a href><img border=2></a> */
+.page[data-edition='web94'] .map-shell {
+  border: 2px solid #0000ee;
+  outline: 0;
+}
+
+.page[data-edition='web94'] .map-shell::before {
+  display: none;
+}
+
+.page[data-edition='web94'] .tool {
+  min-width: 26px;
+  height: 26px;
+}
+
+.page[data-edition='web94'] .caption {
+  margin-top: 8px;
+  font: italic 14px/1.3 var(--t);
+  color: #000;
+  max-width: 512px;
+}
+
+.page[data-edition='web94'] .caption b {
+  background: none;
+  color: #000;
+  padding: 0;
+}
+
+.page[data-edition='web94'] .pin__dot {
+  border-radius: 0;
+  background: #0000ee;
+  border: 1px solid #fff;
+  box-shadow: none;
+}
+
+.page[data-edition='web94'] .pin__label {
+  border: 1px solid #000;
+  font: 13px/1 var(--t);
+  letter-spacing: 0;
+}
+
+.page[data-edition='web94'] .pin__no {
+  background: #000;
+  color: #fff;
+  font: 12px/1 var(--t);
+}
+
+.page[data-edition='web94'] .pin__name,
+.page[data-edition='web94'] .pin:hover .pin__name {
+  background: #fff;
+  color: #0000ee;
+  text-decoration: underline;
+}
+
+.page[data-edition='web94'] .pin.is-selected .pin__name {
+  background: #fff;
+  color: #551a8b;
+}
+
+.page[data-edition='web94'] .pin.is-selected .pin__dot {
+  background: #551a8b;
+}
+
+.page[data-edition='web94'] .pin--lead::after {
+  background: #000;
+  box-shadow: none;
+  width: 1px;
+}
+
+/* <h3> + <ul> of links */
+.page[data-edition='web94'] .contents {
+  background: transparent;
+  padding: 0 0 12px;
+  border-bottom: 2px groove #f0f0f0;
+  margin-bottom: 16px;
+}
+
+.page[data-edition='web94'] .contents__head {
+  display: block;
+  font: bold 19px/1.2 var(--t);
+  letter-spacing: 0;
+  border: 0;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.page[data-edition='web94'] .contents__hint {
+  display: inline;
+  background: none;
+  color: #000;
+  font: normal 16px/1.2 var(--t);
+  letter-spacing: 0;
+  padding: 0;
+  margin-left: 0.4em;
+}
+
+.page[data-edition='web94'] .contents__hint::before {
+  content: '(';
+}
+
+.page[data-edition='web94'] .contents__hint::after {
+  content: ')';
+}
+
+.page[data-edition='web94'] .contents__list {
+  display: block;
+  list-style: disc;
+  padding-left: 40px;
+}
+
+.page[data-edition='web94'] .contents__list li {
+  min-height: 28px;
+}
+
+.page[data-edition='web94'] .entry {
+  display: inline;
+  width: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #0000ee;
+  text-decoration: underline;
+  font: 16px/1.75 var(--t);
+}
+
+.page[data-edition='web94'] .entry__no {
+  display: none;
+}
+
+.page[data-edition='web94'] .entry__name,
+.page[data-edition='web94'] .entry__ja {
+  display: inline;
+  font: inherit;
+  color: inherit;
+  letter-spacing: 0;
+  margin-right: 0.3em;
+}
+
+.page[data-edition='web94'] .entry:hover {
+  background: none;
+  color: #ff0000;
+}
+
+.page[data-edition='web94'] .entry.is-selected {
+  background: none;
+  color: #551a8b;
+}
+
+.page[data-edition='web94'] .entry.is-selected .entry__ja {
+  color: #551a8b;
+}
+
+.page[data-edition='web94'] .story {
+  background: transparent;
+  border: 0;
+  padding: 0 0 12px;
+  border-bottom: 2px groove #f0f0f0;
+}
+
+.page[data-edition='web94'] .story__kicker {
+  font: 16px/1.2 var(--t);
+  letter-spacing: 0;
+}
+
+.page[data-edition='web94'] .story__no {
+  background: none;
+  color: #000;
+  padding: 0;
+  margin-right: 0.4em;
+}
+
+.page[data-edition='web94'] .story__no::after {
+  content: '.';
+}
+
+.page[data-edition='web94'] .story__title {
+  font: bold 19px/1.2 var(--t);
+  letter-spacing: 0;
+}
+
+.page[data-edition='web94'] .story__title span {
+  font: bold 17px/1 var(--jp);
+}
+
+.page[data-edition='web94'] .story__text {
+  font: 16px/1.3 var(--t);
+  max-width: 70ch;
+}
+
+.page[data-edition='web94'] .story__meta,
+.page[data-edition='web94'] .story__src {
+  font: 14px/1.3 'Courier New', monospace;
+  color: #000;
+}
+
+/* <address> */
+.page[data-edition='web94'] .colophon {
+  columns: 1;
+  margin-top: 8px;
+  border: 0;
+  font: italic 16px/1.3 var(--t);
+  color: #000;
+}
+
+.page[data-edition='web94'] .colophon a {
+  color: #0000ee;
+}
+
+@media (max-width: 960px) {
+  .page[data-edition='bbs'] .plate {
+    width: 100%;
+  }
+
+  .page[data-edition='bbs'] .mast__title {
+    font-size: 44px;
+  }
+
+  .page[data-edition='bbs'] .contents__list {
+    display: block;
+  }
+
+  .page[data-edition='bbs'] .entry__ja {
+    display: inline;
+  }
+
+  .page[data-edition='web94'] .entry__ja {
+    display: inline;
+  }
+
+  .page[data-edition='web94'] .contents__list {
+    display: block;
+  }
+}

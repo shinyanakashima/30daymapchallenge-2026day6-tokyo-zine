@@ -4,33 +4,39 @@
 
 ![desktop](docs/screen-desktop.png)
 
-## 7つのエディション
+## 9つのエディション
 
-同じ衛星画像・地名データのまま、誌面デザインを7案から切り替えられる（画面上部の EDITION。紙の PRINT 3案と Web の WEB 4案。`?ed=newwave|pop|tate|web97|flash|web2|keitai` で直接指定でき、選択はブラウザに保存）。
+同じ衛星画像・地名データのまま、誌面デザインを9案から切り替えられる（画面上部の EDITION。紙の PRINT 3案と画面の SCREEN 6案。初期表示は F WEB 1997。`?ed=newwave|pop|tate|bbs|web94|web97|flash|keitai|web2` で直接指定でき、選択はブラウザに保存）。
 
 | | 方向 | 書体・色 |
 | - | - | - |
 | A NEW WAVE | 硬派なニューウェーブ誌。極太グロテスク、斜めの帯、網点、トンボ、罫線 | Archivo Black / 墨・生成り・朱・コバルト |
 | B POP | メンフィス調のポップ誌。グラデーション＋太い縁取りの誌名、星形シール、紙吹雪柄の地紙、エアブラシ風の帯 | Jost / 紺・クリーム・蛍光ピンク・ミント・黄 |
 | C TATEGUMI 縦組 | 日本の情報誌。明朝の縦組み誌名「東京地図」、縦組みリード、網掛けの見出し、「保存版」の判、地名に漢字併記 | Zen Old Mincho / 墨・生成り・金赤 |
-| D WEB 1997 | 同じ雑誌が1990年代後半にWYSIWYGのページ作成ソフトで作った公式ホームページという設定。幅800pxの中央寄せ、パステル水色の背景、グラデーションと白フチのロゴ、ツヤのあるボタンのナビと左メニュー、グラデーションの見出し帯、流れる告知、更新履歴の NEW!、撮影日カウンター、工事中の帯 | Arial Black / MS Pゴシック（端末のフォント） |
-| E FLASH 2001 | Flash全盛期のポータル風。暗い鋼色の地に方眼、クロームの誌名、ドット文字のキャプション、読み込みバー、計器風の四隅の括弧 | Michroma / Silkscreen / DotGothic16 / 黒紺・シアン・ライム |
-| F WEB 2.0 | 2007年ごろのWeb 2.0風。黄緑のグラデーションとピンストライプ、床に映り込む誌名、beta バッジ、角丸の箱、ツヤのあるタグ状の目次 | Lucida Grande / Meiryo（端末のフォント） / 黄緑・オレンジ |
-| G KEITAI 2002 ケータイ | iモード風の幅360pxの1カラム。色帯の見出し、[1]〜[8]の番号付きリンク。**数字キー1〜8で地名を選び、0で全景に戻る**（このエディションのみ） | MS Pゴシック（端末のフォント） |
+| D BBS 1990 パソコン通信 | パソコン通信の端末画面。黒地に16色のドット文字、反転表示のメニュー、受信した画像ファイル風の地図の枠、ステータス行。**数字キー1〜8で地名を選び、0で全景に戻る** | DotGothic16 |
+| E WEB 1994 | 初期のグラフィカルブラウザで見る素のHTML。灰色の背景、既定の書体と見出し、溝付きの区切り線、リンク画像の青枠、黒丸の箇条書きリンク | Times New Roman（端末のフォント） |
+| F WEB 1997 | 同じ雑誌が1990年代後半にWYSIWYGのページ作成ソフトで作った公式ホームページという設定。幅800pxの中央寄せ、パステル水色の背景、グラデーションと白フチのロゴ、ツヤのあるボタンのナビと左メニュー、グラデーションの見出し帯、流れる告知、更新履歴の NEW!、撮影日カウンター、工事中の帯 | Arial Black / MS Pゴシック（端末のフォント） |
+| G FLASH 2001 | Flash全盛期のポータル風。暗い鋼色の地に方眼、クロームの誌名、ドット文字のキャプション、読み込みバー、計器風の四隅の括弧 | Michroma / Silkscreen / DotGothic16 / 黒紺・シアン・ライム |
+| H KEITAI 2002 ケータイ | iモード風の幅360pxの1カラム。色帯の見出し、[1]〜[8]の番号付きリンク。**数字キー1〜8で地名を選び、0で全景に戻る**（D・H のみ） | MS Pゴシック（端末のフォント） |
+| I WEB 2.0 | 2007年ごろのWeb 2.0風。黄緑のグラデーションとピンストライプ、床に映り込む誌名、beta バッジ、角丸の箱、ツヤのあるタグ状の目次 | Lucida Grande / Meiryo（端末のフォント） / 黄緑・オレンジ |
 
-| B POP | C 縦組 | D WEB 1997（GINZA選択） |
+| B POP | C 縦組 | F WEB 1997（GINZA選択） |
 | - | - | - |
 | ![pop](docs/screen-desktop-pop.png) | ![tate](docs/screen-desktop-tate.png) | ![web97](docs/screen-desktop-web97.png) |
 
-| E FLASH 2001 | F WEB 2.0 | G ケータイ（GINZA選択） |
+| G FLASH 2001 | I WEB 2.0 | H ケータイ（GINZA選択） |
 | - | - | - |
 | ![flash](docs/screen-desktop-flash.png) | ![web2](docs/screen-desktop-web2.png) | ![keitai](docs/screen-desktop-keitai.png) |
+
+| D パソコン通信（GINZA選択） | E WEB 1994（GINZA選択） |
+| - | - |
+| ![bbs](docs/screen-desktop-bbs.png) | ![web94](docs/screen-desktop-web94.png) |
 
 | スマホ A | スマホ B（GINZA選択） | スマホ C |
 | - | - | - |
 | ![phone](docs/screen-phone-top.png) | ![phone pop](docs/screen-phone-pop-ginza.png) | ![phone tate](docs/screen-phone-tate.png) |
 
-装飾はすべて地図の外側のレイヤで、地図画像・ラベル位置はエディションによらず共通。DのWebらしさ（流れる告知など）は D の中だけに閉じ、他の誌面とは混ぜない。流れる告知は `prefers-reduced-motion` で止まる。
+装飾はすべて地図の外側のレイヤで、地図画像・ラベル位置はエディションによらず共通。Webらしさ（流れる告知など）は各エディションの中だけに閉じ、他の誌面とは混ぜない。流れる告知は `prefers-reduced-motion` で止まる。
 
 ## 操作
 
@@ -103,7 +109,7 @@ MapLibre の `image` ソースに manifest の4隅座標で配置する。
 - 地名ラベルは MapLibre Marker（HTML）で、地図の投影と同じ変換で配置。誌面装飾（斜めの帯・網点・紙の粒子・色版ずれ）は地図の外側の別レイヤ。地図本体には重ねない。
 - 地名の操作は目次ボタン（キーボード・スクリーンリーダー対応、`aria-pressed`）が担い、地図上のラベルはその鏡像。
 - 幅960px以下は縦組みに組み直し、地図の幅が480px未満では地図上は番号のみ（選択中のみ名称表示）。
-- フォント：Archivo Black / Archivo / IBM Plex Mono / Jost / Zen Old Mincho / Michroma / Silkscreen / DotGothic16（いずれも SIL Open Font License、@fontsource で同梱）。D・F・G は当時の雰囲気を出すため端末のフォント（MS Pゴシック、Meiryo など）を優先し、無い環境では代替フォントで表示される。
+- フォント：Archivo Black / Archivo / IBM Plex Mono / Jost / Zen Old Mincho / Michroma / Silkscreen / DotGothic16（いずれも SIL Open Font License、@fontsource で同梱）。E・F・H・I は当時の雰囲気を出すため端末のフォント（MS Pゴシック、Meiryo など）を優先し、無い環境では代替フォントで表示される。
 
 ## 再現手順
 

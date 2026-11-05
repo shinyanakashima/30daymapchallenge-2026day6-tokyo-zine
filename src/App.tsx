@@ -12,12 +12,16 @@ const EDITIONS = [
   { id: 'newwave', group: 'PRINT', key: 'A', name: 'NEW WAVE' },
   { id: 'pop', group: 'PRINT', key: 'B', name: 'POP' },
   { id: 'tate', group: 'PRINT', key: 'C', name: 'TATEGUMI', ja: '縦組' },
-  { id: 'web97', group: 'WEB', key: 'D', name: 'WEB 1997' },
-  { id: 'flash', group: 'WEB', key: 'E', name: 'FLASH 2001' },
-  { id: 'web2', group: 'WEB', key: 'F', name: 'WEB 2.0' },
-  { id: 'keitai', group: 'WEB', key: 'G', name: 'KEITAI 2002', ja: 'ケータイ' },
+  { id: 'bbs', group: 'SCREEN', key: 'D', name: 'BBS 1990', ja: 'パソコン通信' },
+  { id: 'web94', group: 'SCREEN', key: 'E', name: 'WEB 1994' },
+  { id: 'web97', group: 'SCREEN', key: 'F', name: 'WEB 1997' },
+  { id: 'flash', group: 'SCREEN', key: 'G', name: 'FLASH 2001' },
+  { id: 'keitai', group: 'SCREEN', key: 'H', name: 'KEITAI 2002', ja: 'ケータイ' },
+  { id: 'web2', group: 'SCREEN', key: 'I', name: 'WEB 2.0' },
 ] as const
-const GROUPS = ['PRINT', 'WEB'] as const
+/** editions where number keys pick places and 0 returns to the full view */
+const ACCESS_KEYS: readonly string[] = ['bbs', 'keitai']
+const GROUPS = ['PRINT', 'SCREEN'] as const
 type Edition = (typeof EDITIONS)[number]['id']
 const isEdition = (v: unknown): v is Edition => EDITIONS.some((e) => e.id === v)
 
@@ -30,7 +34,7 @@ function initialEdition(): Edition {
   } catch {
     /* storage unavailable */
   }
-  return 'newwave'
+  return 'web97'
 }
 
 function useEdition() {
@@ -79,8 +83,8 @@ export default function App() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') fullView()
-      // KEITAI edition: number keys pick places, 0 returns to the full view (i-mode style access keys)
-      if (edition !== 'keitai' || e.ctrlKey || e.metaKey || e.altKey) return
+      // BBS / KEITAI editions: number keys pick places, 0 returns to the full view
+      if (!ACCESS_KEYS.includes(edition) || e.ctrlKey || e.metaKey || e.altKey) return
       if (e.key === '0') fullView()
       const n = Number(e.key)
       if (n >= 1 && n <= places.length) select(places[n - 1].id)
@@ -155,6 +159,11 @@ export default function App() {
             </span>
           )}
         </h1>
+        {edition === 'bbs' && (
+          <pre className="bbs-banner" aria-hidden="true">
+            {`*** TOKYO MAP NET へようこそ ***\n画像 TOKYO.MAG を受信しました (${scene.native_resolution_m}m/pixel, ${scene.acquired_date})`}
+          </pre>
+        )}
         {edition === 'flash' && (
           <p className="y2k-load" aria-hidden="true">
             <span className="y2k-load__bar" />
@@ -197,7 +206,7 @@ export default function App() {
 
       <section className="lead">
         <h2 className="lead__head">
-          THE CITY
+          THE CITY{' '}
           <br />
           FROM 705 KM UP
         </h2>
@@ -236,7 +245,7 @@ export default function App() {
                   type="button"
                   className={`entry${p.id === selectedId ? ' is-selected' : ''}`}
                   aria-pressed={p.id === selectedId}
-                  aria-keyshortcuts={edition === 'keitai' ? String(i + 1) : undefined}
+                  aria-keyshortcuts={ACCESS_KEYS.includes(edition) ? String(i + 1) : undefined}
                   onClick={() => (p.id === selectedId ? fullView() : select(p.id))}
                 >
                   <span className="entry__key" aria-hidden="true">
@@ -286,11 +295,18 @@ export default function App() {
         </article>
       </main>
 
-      {edition === 'keitai' && (
+      {ACCESS_KEYS.includes(edition) && (
         <p className="k-top">
           <button type="button" onClick={fullView} aria-keyshortcuts="0">
-            [0] 全景に戻る / FULL VIEW
+            {edition === 'bbs' ? '0. 全景に戻る (FULL VIEW)' : '[0] 全景に戻る / FULL VIEW'}
           </button>
+        </p>
+      )}
+      {edition === 'bbs' && (
+        <p className="bbs-status" aria-hidden="true">
+          <span>TOKYO MAP NET</span>
+          <span>衛星画像フォーラム</span>
+          <span>番号を入力してください (1-{places.length}, 0)</span>
         </p>
       )}
 
